@@ -1,0 +1,14 @@
+.container{
+    background-color: black;
+    color: white;
+    min-height: 100vh;
+}
+
+.circle{
+    position: absolute;
+    height: 2rem;
+    width: 2rem;
+    border: 2px solid white;
+    border-radius: 50%;
+    
+}
