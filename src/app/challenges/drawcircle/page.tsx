@@ -1,24 +1,46 @@
 "use client";
-import React, { useState } from "react";
 import styles from "./drawcircle.module.css";
+import React, { useState } from "react";
 
 const DrawCircle = () => {
   //TODO: undo and redo will added
 
-  type TClickedPositions = { x: number; y: number }[];
+  type TClickedPositions = TClickedObject[];
+  type TClickedObject = { x: number; y: number };
 
   const [clickedPositions, setClickedPositions] = useState<TClickedPositions>(
     []
   );
 
+  const [undoPositions, setUndoPositions] = useState<TClickedPositions>([]);
+
   function handleDrawingCircle(
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) {
     setClickedPositions((prevPos) => [...prevPos, { x: e.pageX, y: e.pageY }]);
-    console.log(e.pageX, e.pageY);
   }
 
-  console.log(clickedPositions);
+  function undoLastClicked(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    e.stopPropagation();
+    e.preventDefault();
+    const newPoints = [...clickedPositions];
+    let undoPoint = newPoints.pop() as TClickedObject;
+    console.log({ undoPoint });
+    setUndoPositions((prevPos) => [...prevPos, undoPoint]);
+    setClickedPositions(newPoints);
+  }
+  console.count("render");
+  console.log({ undoPositions });
+
+  function resetClickedPositionList(
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) {
+    e.stopPropagation();
+    setClickedPositions([]);
+  }
+
+  let isClickedPositionsListEmpty = clickedPositions.length == 0;
+  let isUn;
 
   return (
     <div className={styles.container} onClick={(e) => handleDrawingCircle(e)}>
@@ -27,8 +49,25 @@ const DrawCircle = () => {
           key={idx}
           style={{ left: pos.x, top: pos.y }}
           className={styles.circle}
-        ></div>
+        >
+          {idx}
+        </div>
       ))}
+
+      <button
+        disabled={isClickedPositionsListEmpty}
+        onClick={(e) => undoLastClicked(e)}
+        className={styles.btn}
+      >
+        Undo
+      </button>
+      <button className={styles.btn}>Redo</button>
+      <button
+        onClick={(e) => resetClickedPositionList(e)}
+        className={styles.btn}
+      >
+        Reset
+      </button>
     </div>
   );
 };
