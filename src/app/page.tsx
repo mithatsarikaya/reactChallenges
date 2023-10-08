@@ -7,6 +7,31 @@ export default function Home() {
   return (
     <div>
       <Header />
+      <Header />
+      <Header />
+      <Header />
+      <Header />
+      <Header />
+      <Header />
+      <Header />
+      <Header />
+      <Header />
+      <Header />
+      <Header />
+      <Header />
+      <Header />
+      <Header />
+      <Header />
+      <Header />
+      <Header />
+      <Header />
+      <Header />
+      <Header />
+      <Header />
+      <Header />
+      <Header />
+      <Header />
+      <Header />
       <Challlenges />
     </div>
   );
