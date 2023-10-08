@@ -5,7 +5,13 @@ import Link from "next/link";
 const HomeButton = () => {
   return (
     <Link className={styles.homeButton} href={"/"}>
-      <Image width={75} height={75} src="/homeIcon.svg" alt="home icon"></Image>
+      <Image
+        style={{ backgroundColor: "white", borderRadius: "50%" }}
+        width={80}
+        height={80}
+        src="/homeIcon.svg"
+        alt="home icon"
+      ></Image>
     </Link>
   );
 };

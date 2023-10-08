@@ -1,9 +1,8 @@
 .homeButton{
-    position: sticky;
-    float: right;
+    position: fixed;
+    /* float: right; */
     bottom: 2rem;
+    right: 2rem;
     margin-right: 2rem;
-    /* right: 1rem; */
-    /* bottom: 1rem; */
     cursor: pointer;
 }
