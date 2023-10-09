@@ -1,0 +1,19 @@
+.challenge{
+    display: flex;
+    gap: 1rem;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+
+.challengeLink{
+    padding: 10px;
+    width: 200px;
+    border: 2px solid salmon;
+    text-align: center;
+}
+
+.challengeLink:hover{
+    color:salmon;
+    background-color: white;
+}

@@ -4,7 +4,7 @@ import Challlenges from "./components/Challenges/Challenges";
 
 export default function Home() {
   return (
-    <div>
+    <div className={styles.homeContainer}>
       <Header />
       <Challlenges />
     </div>

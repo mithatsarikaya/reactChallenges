@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <nav className={styles.navbar}>
       <Link href={"/"}>
-        <h1>React challenges</h1>
+        <h1 className={styles.mainHeader}>React challenges by nuuklu</h1>
       </Link>
     </nav>
   );

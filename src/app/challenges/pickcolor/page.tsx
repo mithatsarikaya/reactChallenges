@@ -32,16 +32,14 @@ const PickColor = () => {
   };
   const pickAnAnswer = (answerByUser: string) => {
     if (answerByUser == questionedColor) {
-      console.log("you are correct");
       setIsAnswerCorrect(true);
 
       //TODO: make screen unClickable
 
       setTimeout(() => {
-        refreshThisShit();
+        refreshThisGame();
       }, 1500);
     } else {
-      console.log("wrong");
       setIsAnswerCorrect(false);
     }
   };
@@ -52,7 +50,7 @@ const PickColor = () => {
     );
   }, [questionedColor]);
 
-  const refreshThisShit = () => {
+  const refreshThisGame = () => {
     setQuestionedColor(getRandomColor());
     setIsAnswerCorrect(null);
   };
@@ -64,17 +62,20 @@ const PickColor = () => {
 
   return (
     <main className={styles.container}>
-      <button onClick={refreshThisShit}>Refresh this shit</button>
+      {/* <button onClick={refreshThisGame}>Refresh this </button> */}
       <div
         style={{ backgroundColor: questionedColor }}
         className={styles.square}
       >
-        {questionedColor}
+        {isAnswerCorrect == true && "New Color in 2 sec"}
       </div>
       <div className={styles.buttons}>
         {questionedColor &&
           colorChoices.map((colorChoice) => (
-            <button onClick={() => pickAnAnswer(colorChoice)}>
+            <button
+              disabled={isAnswerCorrect == true}
+              onClick={() => pickAnAnswer(colorChoice)}
+            >
               {colorChoice}
             </button>
           ))}
