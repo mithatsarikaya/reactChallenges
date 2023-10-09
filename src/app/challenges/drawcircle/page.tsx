@@ -3,8 +3,6 @@ import styles from "./drawcircle.module.css";
 import React, { useState } from "react";
 
 const DrawCircle = () => {
-  //TODO: undo and redo will added
-
   type TClickedPositions = TClickedObject[];
   type TClickedObject = { x: number; y: number };
 

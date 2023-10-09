@@ -73,6 +73,7 @@ const PickColor = () => {
         {questionedColor &&
           colorChoices.map((colorChoice) => (
             <button
+              key={colorChoice}
               disabled={isAnswerCorrect == true}
               onClick={() => pickAnAnswer(colorChoice)}
             >
