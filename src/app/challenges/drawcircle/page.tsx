@@ -12,7 +12,7 @@ const DrawCircle = () => {
     []
   );
 
-  const [undoPositions, setUndoPositions] = useState<TClickedPositions>([]);
+  const [poppedPositions, setPoppedPositions] = useState<TClickedPositions>([]);
 
   function handleDrawingCircle(
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -26,29 +26,29 @@ const DrawCircle = () => {
     const newPoints = [...clickedPositions];
     let undoPoint = newPoints.pop() as TClickedObject;
     console.log({ undoPoint });
-    setUndoPositions((prevPos) => [...prevPos, undoPoint]);
+    setPoppedPositions((prevPos) => [...prevPos, undoPoint]);
     setClickedPositions(newPoints);
   }
   console.count("render");
-  console.log({ undoPositions });
+  console.log({ undoPositions: poppedPositions });
 
   function resetClickedPositionList(
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
     e.stopPropagation();
     setClickedPositions([]);
-    setUndoPositions([]);
+    setPoppedPositions([]);
   }
   function redoLastUndo(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.stopPropagation();
-    let undoPoints = [...undoPositions];
+    let undoPoints = [...poppedPositions];
     let redoPoint = undoPoints.pop() as TClickedObject;
     setClickedPositions((prevPos) => [...prevPos, redoPoint]);
-    setUndoPositions(undoPoints);
+    setPoppedPositions(undoPoints);
   }
 
   let isClickedPositionsListEmpty = clickedPositions.length == 0;
-  let isRedolistEmpty = undoPositions.length == 0;
+  let isRedolistEmpty = poppedPositions.length == 0;
 
   return (
     <div className={styles.container} onClick={(e) => handleDrawingCircle(e)}>

@@ -14,3 +14,12 @@ a:hover{
   text-decoration: underline;
 }
 
+button{
+  cursor: pointer;
+}
+
+button:hover{
+  outline: black 4px solid;
+
+}
+

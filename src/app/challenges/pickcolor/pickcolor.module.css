@@ -1,0 +1,39 @@
+.container{
+    display: grid;
+    place-content: center;
+    height: 100vh;
+}
+
+.square{
+    height: 350px;
+    width: 350px;
+    border: 1px salmon solid;
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-between;
+    border: 1px salmon solid;
+    margin: 10px 0;
+}
+
+.buttons > button{
+    flex-grow: 1;
+    height: 50px;
+    background-color: white;
+    color: black;
+}
+
+.correctAnswer{
+    color: green;
+    text-align: center;
+}
+.wrongAnswer{
+    color: red;
+    text-align: center;
+}
+
+.pickAcolor{
+    color: yellow;
+    text-align: center;
+}
