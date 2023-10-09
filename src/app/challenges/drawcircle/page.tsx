@@ -37,10 +37,18 @@ const DrawCircle = () => {
   ) {
     e.stopPropagation();
     setClickedPositions([]);
+    setUndoPositions([]);
+  }
+  function redoLastUndo(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    e.stopPropagation();
+    let undoPoints = [...undoPositions];
+    let redoPoint = undoPoints.pop() as TClickedObject;
+    setClickedPositions((prevPos) => [...prevPos, redoPoint]);
+    setUndoPositions(undoPoints);
   }
 
   let isClickedPositionsListEmpty = clickedPositions.length == 0;
-  let isUn;
+  let isRedolistEmpty = undoPositions.length == 0;
 
   return (
     <div className={styles.container} onClick={(e) => handleDrawingCircle(e)}>
@@ -61,7 +69,13 @@ const DrawCircle = () => {
       >
         Undo
       </button>
-      <button className={styles.btn}>Redo</button>
+      <button
+        onClick={redoLastUndo}
+        disabled={isRedolistEmpty}
+        className={styles.btn}
+      >
+        Redo
+      </button>
       <button
         onClick={(e) => resetClickedPositionList(e)}
         className={styles.btn}
