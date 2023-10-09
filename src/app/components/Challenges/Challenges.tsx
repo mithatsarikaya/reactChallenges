@@ -7,7 +7,7 @@ const Challlenges = () => {
       {challengesInfos.map((challenge) => (
         <article className={styles.challenge} key={challenge.id}>
           <Link className={styles.challengeLink} href={challenge.linkHref()}>
-            {challenge.urlName}
+            {challenge.urlName} {challenge.onProgress && "(not finished)"}
           </Link>
           <p>{challenge.challenge}</p>
         </article>

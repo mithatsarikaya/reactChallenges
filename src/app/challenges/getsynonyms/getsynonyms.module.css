@@ -1,0 +1,28 @@
+.getsynonymsContainer{
+    display: grid;
+    place-content: center;
+    height: 100vh;
+    gap:2rem;
+}
+
+.synonymsForm{
+    display: flex;
+    flex-direction: column;
+    gap:1rem;
+}
+
+.synonymsForm > input {
+    height: 100px;
+    box-shadow: 2px 2px;
+    padding-left: 10px;
+}
+
+.synonymsForm > button {
+    height: 50px;
+    box-shadow: 2px 2px;
+}
+
+.buttons{
+    background-color: black;
+    
+}

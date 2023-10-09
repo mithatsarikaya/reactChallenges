@@ -4,6 +4,7 @@ export type TChallangeInfo = {
   linkHref: Function;
   challenge: string;
   inspiredBy: string;
+  onProgress?: boolean;
 };
 
 export type TChallangeInfoArray = TChallangeInfo[];
@@ -30,6 +31,16 @@ const challengesInfos: TChallangeInfoArray = [
     challenge: "Pick right color that show on the screen",
     inspiredBy:
       "https://www.youtube.com/watch?v=QNYljS0_TOE&list=PL6x5Q-Sj_Bla3_wMqhETxMBjFml0XJNPI&index=1&t=2s",
+  },
+  {
+    id: 2,
+    urlName: "getsynonyms",
+    challenge: "Get synonyms of the input from an API",
+    inspiredBy: "https://www.youtube.com/watch?v=-Rtlnsgbc0k&t=645s",
+    linkHref() {
+      return mainUrlForChallenges.concat(this.urlName);
+    },
+    onProgress: true,
   },
 ];
 
