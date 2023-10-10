@@ -10,12 +10,16 @@ const GetSynonyms = () => {
   const [word, setWord] = useState<string>("");
   const [synonyms, setSynonyms] = useState<string[]>([]);
   const [error, setError] = useState<boolean>(false);
+  //i create this state to prevent fetching whenever word changess
+  //i want it fetch when user submit the form or clicks another word
+  const [getSynonyms, setGetSynonyms] = useState<boolean>(false);
 
   const fetchWithWord = (word: string) => {
     fetch(url + word)
       .then((res) => res.json())
       .then((resJson: TResponse) => {
         setError(false);
+        setSynonyms([]);
         if (resJson.length >= 4) {
           setSynonyms(resJson.slice(0, 4).map((word) => word.word));
         } else if (resJson.length > 0) {
@@ -28,6 +32,7 @@ const GetSynonyms = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setGetSynonyms(true);
     fetchWithWord(word);
   };
 
@@ -37,10 +42,11 @@ const GetSynonyms = () => {
   ) => {
     e.preventDefault();
     setWord(wordFromSynonyms);
+    setGetSynonyms(true);
   };
 
   useEffect(() => {
-    fetchWithWord(word);
+    getSynonyms && fetchWithWord(word);
   }, [word]);
 
   return (
@@ -49,7 +55,10 @@ const GetSynonyms = () => {
       <form onSubmit={handleSubmit} className={styles.synonymsForm} action="">
         <input
           value={word}
-          onChange={(e) => setWord(e.target.value)}
+          onChange={(e) => {
+            setGetSynonyms(false);
+            setWord(e.target.value);
+          }}
           type="text"
           placeholder="write a word"
         />
