@@ -5,6 +5,7 @@
     gap:2rem;
 }
 
+
 .synonymsForm{
     width: 600px;
     display: flex;
@@ -16,11 +17,13 @@
     height: 100px;
     box-shadow: 2px 2px;
     padding-left: 10px;
+    font-size: 2rem;
 }
 
 .synonymsForm > button {
     height: 50px;
     box-shadow: 2px 2px;
+    font-size: 2rem;
 }
 
 .buttons{
@@ -34,5 +37,6 @@
 .buttons > button {
     background-color: gray;
     padding: 10px;
+    font-size: 1.5rem;
 }
 

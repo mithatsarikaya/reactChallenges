@@ -3,3 +3,30 @@
     place-content: center;
     height: 100vh;
 }
+
+.inputForm{
+    margin-bottom: 2rem;
+    display: grid;
+
+}
+
+.inputForm > input{
+    font-size: 25px;
+    padding-left: 10px;
+    text-align: center;
+}
+.inputForm > button{
+    font-size: 30px;
+}
+
+.queueContainer{
+    width: 600px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 50px;
+}
+
+.queue{
+    border: 2px dashed white;
+    width: 100px;
+}
