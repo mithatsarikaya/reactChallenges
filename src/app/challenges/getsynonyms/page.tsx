@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import styles from "./getsynonyms.module.css";
+import { delaySomeTime } from "@/app/utils/helpers";
 
 type TResponse = { word: string; score: number }[];
 
@@ -10,11 +11,14 @@ const GetSynonyms = () => {
   const [word, setWord] = useState<string>("");
   const [synonyms, setSynonyms] = useState<string[]>([]);
   const [error, setError] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   //i create this state to prevent fetching whenever word changess
   //i want it fetch when user submit the form or clicks another word
   const [getSynonyms, setGetSynonyms] = useState<boolean>(false);
 
-  const fetchWithWord = (word: string) => {
+  const fetchWithWord = async (word: string) => {
+    setIsLoading(true);
+    await delaySomeTime(500);
     fetch(url + word)
       .then((res) => res.json())
       .then((resJson: TResponse) => {
@@ -27,11 +31,13 @@ const GetSynonyms = () => {
         } else if (resJson.length == 0) {
           setError(true);
         }
-      });
+      })
+      .finally(() => setIsLoading(false));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     setGetSynonyms(true);
     fetchWithWord(word);
   };
@@ -51,7 +57,6 @@ const GetSynonyms = () => {
 
   return (
     <main className={styles.getsynonymsContainer}>
-      <h1 style={{ fontSize: "3rem", textAlign: "center" }}>Not Finished</h1>
       <form onSubmit={handleSubmit} className={styles.synonymsForm} action="">
         <input
           value={word}
@@ -67,6 +72,7 @@ const GetSynonyms = () => {
       </form>
       <div className={styles.buttons}>
         {synonyms &&
+          !isLoading &&
           synonyms.map((word) => (
             <button
               onClick={(e) => lookToSynonymsofSynonym(e, word)}
@@ -76,6 +82,7 @@ const GetSynonyms = () => {
             </button>
           ))}
       </div>
+      {isLoading && <p style={{ textAlign: "center" }}>Loading...</p>}
     </main>
   );
 };
