@@ -14,12 +14,24 @@ const GetInQueue = () => {
   const handleSendToQueue = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!newNumber) return;
-    console.log("object");
 
-    let newNumbers = qNumbers.slice();
-    newNumbers[0].push(newNumber);
+    let newQNumbers = qNumbers.slice();
 
-    setQNumbers(newNumbers);
+    let newQNumbersSumArrayWithIDs = newQNumbers.map((arr, idx) => {
+      if (arr.length == 0) {
+        return { id: idx, sum: 0 };
+      } else {
+        return { id: idx, sum: arr.reduce((tot, curr) => tot + curr) };
+      }
+    });
+
+    newQNumbersSumArrayWithIDs.sort((a, b) => a.sum - b.sum);
+
+    let idWithTheMinValue = newQNumbersSumArrayWithIDs[0].id;
+
+    newQNumbers[idWithTheMinValue].push(newNumber);
+
+    setQNumbers(newQNumbers);
   };
 
   return (
