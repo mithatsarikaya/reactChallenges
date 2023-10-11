@@ -42,6 +42,16 @@ const challengesInfos: TChallangeInfoArray = [
     },
     onProgress: false,
   },
+  {
+    id: 3,
+    urlName: "getinqueue",
+    challenge: "Put given number to the least sized queue",
+    inspiredBy: "https://www.youtube.com/watch?v=B9fmr1TpKHE",
+    linkHref() {
+      return mainUrlForChallenges.concat(this.urlName);
+    },
+    onProgress: true,
+  },
 ];
 
 export default challengesInfos;
