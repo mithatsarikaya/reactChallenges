@@ -25,9 +25,9 @@ const GetInQueue = () => {
       }
     });
 
-    newQNumbersSumArrayWithIDs.sort((a, b) => a.sum - b.sum);
-
-    let idWithTheMinValue = newQNumbersSumArrayWithIDs[0].id;
+    let idWithTheMinValue = newQNumbersSumArrayWithIDs.toSorted(
+      (a, b) => a.sum - b.sum
+    )[0].id;
 
     newQNumbers[idWithTheMinValue].push(newNumber);
 
