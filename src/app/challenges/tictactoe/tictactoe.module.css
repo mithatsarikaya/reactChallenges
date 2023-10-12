@@ -3,3 +3,16 @@
     place-content: center;
     height: 100vh;
 }
+
+.boxes{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+}
+
+.box{
+    height: 100px;
+    width: 100px;
+    font-size: 50px;
+    text-align: center;
+}
