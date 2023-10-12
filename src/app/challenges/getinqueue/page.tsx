@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./getinqueue.module.css";
 
 type TQueueList = TQueue[];
@@ -10,6 +10,30 @@ const GetInQueue = () => {
   const [qNumbers, setQNumbers] = useState<TQueueList>([[], [], [], [], []]);
   console.log(qNumbers);
   console.log(newNumber);
+
+  useEffect(() => {
+    const decreaseIfNotZero = setInterval(() => {
+      setQNumbers((prevNumbers) =>
+        prevNumbers.map((p) => {
+          return p
+            .map((s, idx) => {
+              if (s == 0) {
+                return 0;
+              } else if (idx == 0) {
+                return s - 1;
+              } else {
+                return s;
+              }
+            })
+            .filter((s) => s != 0);
+        })
+      );
+    }, 1000);
+
+    return () => {
+      clearInterval(decreaseIfNotZero);
+    };
+  }, []);
 
   const handleSendToQueue = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
