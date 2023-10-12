@@ -25,7 +25,7 @@ const GetInQueue = () => {
                 return s;
               }
             })
-            .filter((s) => s != 0);
+            .filter((s) => s > 0);
         })
       );
     }, 1000);
