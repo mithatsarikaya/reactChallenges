@@ -3,7 +3,7 @@ export type TChallangeInfo = {
   urlName: string;
   linkHref: Function;
   challenge: string;
-  inspiredBy: string;
+  inspiredBy?: string;
   onProgress?: boolean;
 };
 
@@ -51,6 +51,15 @@ const challengesInfos: TChallangeInfoArray = [
       return mainUrlForChallenges.concat(this.urlName);
     },
     onProgress: false,
+  },
+  {
+    id: 4,
+    urlName: "tictactoe",
+    challenge: "classic tictactoe game",
+    linkHref() {
+      return mainUrlForChallenges.concat(this.urlName);
+    },
+    onProgress: true,
   },
 ];
 
