@@ -59,7 +59,7 @@ const challengesInfos: TChallangeInfoArray = [
     linkHref() {
       return mainUrlForChallenges.concat(this.urlName);
     },
-    onProgress: true,
+    onProgress: false,
   },
 ];
 

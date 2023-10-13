@@ -11,7 +11,12 @@
     width: 2rem;
     border: 2px solid white;
     border-radius: 50%;
+    display: grid;
+    place-content: center;
+    /* display: flex;
+    align-items: center;
     text-align: center;
+    justify-content: center; */
 }
 
 .btn{
