@@ -7,7 +7,6 @@
 .inputForm{
     margin-bottom: 2rem;
     display: grid;
-
 }
 
 .inputForm > input{
@@ -20,7 +19,8 @@
 }
 
 .queueContainer{
-    width: 600px;
+    /* width: 600px; */
+    width: 100%;
     display: flex;
     justify-content: space-between;
     font-size: 50px;
@@ -28,5 +28,6 @@
 
 .queue{
     border: 2px dashed white;
-    width: 100px;
+    width: 20%;
+    margin-right: 10px;
 }
