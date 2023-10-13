@@ -28,6 +28,9 @@ const TicTacToe = () => {
     return num % 2 == 0 ? "X" : "O";
   };
 
+  let letter = putXAndOAccordingly(mouseClicked);
+  let winnerLetter = isFinished && letter == "X" ? "O" : "X";
+
   const handlePutLetter = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     rowIDUserClicked: number,
@@ -42,9 +45,7 @@ const TicTacToe = () => {
         prevBoard.map((row, rowID) =>
           rowID == rowIDUserClicked
             ? row.map((col, colID) =>
-                colID == colIDUserClicked
-                  ? putXAndOAccordingly(mouseClicked)
-                  : col
+                colID == colIDUserClicked ? letter : col
               )
             : row
         )
@@ -84,7 +85,7 @@ const TicTacToe = () => {
 
   return (
     <main className={styles.container}>
-      {isFinished && "finished"}
+      {isFinished && <p>{winnerLetter} won!</p>}
       <section className={styles.boxes}>
         {board.map((row, rowIdx) =>
           row.map((squ, colIdx) => (
