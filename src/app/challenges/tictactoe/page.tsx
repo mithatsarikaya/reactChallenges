@@ -12,13 +12,10 @@ const TicTacToe = () => {
   const [board, setBoard] = useState(initialBoard);
 
   const [mouseClicked, setMouseClicked] = useState(0);
-  console.log(board);
 
   const putXAndOAccordingly = (num: number) => {
     return num % 2 == 0 ? "X" : "O";
   };
-
-  console.log(putXAndOAccordingly(mouseClicked));
 
   const handlePutLetter = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -42,6 +39,10 @@ const TicTacToe = () => {
     );
   };
 
+  let winByRow: boolean = board
+    .map((row) => row.map((cell) => row.every((ro) => ro == cell && ro != "")))
+    .map((row) => row.every((cell) => cell == true))[0];
+
   const handleReset = () => {
     setBoard(initialBoard);
     setIsFinished(false);
@@ -59,6 +60,7 @@ const TicTacToe = () => {
               className={styles.box}
             >
               {squ}
+              {rowIdx} {colIdx}
             </button>
           ))
         )}
