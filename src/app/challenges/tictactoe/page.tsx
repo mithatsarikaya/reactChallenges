@@ -6,12 +6,10 @@ const TicTacToe = () => {
     return Array(3).fill("");
   };
 
+  let initialBoard = [createBlankRow(), createBlankRow(), createBlankRow()];
+
   const [isFinished, setIsFinished] = useState<boolean>(false);
-  const [board, setBoard] = useState([
-    createBlankRow(),
-    createBlankRow(),
-    createBlankRow(),
-  ]);
+  const [board, setBoard] = useState(initialBoard);
 
   const [mouseClicked, setMouseClicked] = useState(0);
   console.log(board);
@@ -44,6 +42,12 @@ const TicTacToe = () => {
     );
   };
 
+  const handleReset = () => {
+    setBoard(initialBoard);
+    setIsFinished(false);
+    setMouseClicked(0);
+  };
+
   return (
     <main className={styles.container}>
       <section className={styles.boxes}>
@@ -59,6 +63,10 @@ const TicTacToe = () => {
           ))
         )}
       </section>
+
+      <button onClick={handleReset} className={styles.reset}>
+        Reset
+      </button>
     </main>
   );
 };
