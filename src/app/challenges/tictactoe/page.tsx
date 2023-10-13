@@ -44,9 +44,9 @@ const TicTacToe = () => {
       setBoard((prevBoard) =>
         prevBoard.map((row, rowID) =>
           rowID == rowIDUserClicked
-            ? row.map((col, colID) =>
-                colID == colIDUserClicked ? letter : col
-              )
+            ? row.map((col, colID) => {
+                return colID == colIDUserClicked && col == "" ? letter : col;
+              })
             : row
         )
       );
@@ -90,6 +90,7 @@ const TicTacToe = () => {
         {board.map((row, rowIdx) =>
           row.map((squ, colIdx) => (
             <button
+              disabled={squ}
               key={colIdx}
               onClick={(e) => handlePutLetter(e, rowIdx, colIdx)}
               className={styles.box}
