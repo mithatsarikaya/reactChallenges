@@ -13,6 +13,17 @@ const TicTacToe = () => {
 
   const [mouseClicked, setMouseClicked] = useState(0);
 
+  const checkIfAnyArrayHasSameValue = (
+    arrayOfLetterArrays: typeof initialBoard
+  ): boolean => {
+    return arrayOfLetterArrays
+      .map((row) =>
+        row.map((cell) => row.every((ro) => ro == cell && ro != ""))
+      )
+      .map((row) => row.every((cell) => cell == true))
+      .some(Boolean);
+  };
+
   const putXAndOAccordingly = (num: number) => {
     return num % 2 == 0 ? "X" : "O";
   };
@@ -41,43 +52,22 @@ const TicTacToe = () => {
     }
   };
 
-  let winByRow: boolean = board
-    .map((row) => row.map((cell) => row.every((ro) => ro == cell && ro != "")))
-    .map((row) => row.every((cell) => cell == true))
-    .some(Boolean);
-
-  // let boardForLearning = [
-  //   [0, 0, 0],
-  //   [1, 1, 1],
-  //   [2, 2, 2],
-  // ];
+  let winByRow: boolean = checkIfAnyArrayHasSameValue(board);
 
   const winByColumn = () => {
     let newBoard = board.map((row, idx) =>
       row.map((cell, colIdx) => board[colIdx][idx])
     );
 
-    return newBoard
-      .map((row) =>
-        row.map((cell) => row.every((ro) => ro == cell && ro != ""))
-      )
-      .map((row) => row.every((cell) => cell == true))
-      .some(Boolean);
+    return checkIfAnyArrayHasSameValue(newBoard);
   };
-
-  // console.log("herewinbycvolş", winByColumn());
 
   const winByDiagonal = () => {
     let newBoard = [
       [board[0][0], board[1][1], board[2][2]],
       [board[0][2], board[1][1], board[2][0]],
     ];
-    return newBoard
-      .map((row) =>
-        row.map((cell) => row.every((ro) => ro == cell && ro != ""))
-      )
-      .map((row) => row.every((cell) => cell == true))
-      .some(Boolean);
+    return checkIfAnyArrayHasSameValue(newBoard);
   };
 
   const handleReset = () => {
