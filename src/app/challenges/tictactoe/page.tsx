@@ -24,6 +24,12 @@ const TicTacToe = () => {
       .some(Boolean);
   };
 
+  let draw = board
+    .map((row) => row.map((cell) => cell != ""))
+    .map((row) => row.every((cell) => cell == true))
+    .every(Boolean);
+  console.log({ draw });
+
   const putXAndOAccordingly = (num: number) => {
     return num % 2 == 0 ? "X" : "O";
   };
@@ -85,7 +91,14 @@ const TicTacToe = () => {
 
   return (
     <main className={styles.container}>
-      {isFinished && <p>{winnerLetter} won!</p>}
+      <div style={{ height: "50px", textAlign: "center" }}>
+        {isFinished && !draw && (
+          <p style={{ color: "red", fontSize: "40px" }}>{winnerLetter} won!</p>
+        )}
+        {!isFinished && draw && (
+          <p style={{ color: "yellow", fontSize: "40px" }}>Draw</p>
+        )}
+      </div>
       <section className={styles.boxes}>
         {board.map((row, rowIdx) =>
           row.map((squ, colIdx) => (
