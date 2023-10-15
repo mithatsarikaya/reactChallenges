@@ -1,16 +1,11 @@
 import styles from "./challenges.module.css";
 import challengesInfos from "@/statics/challengesInfos";
-import Link from "next/link";
+import SingleChallenge from "./components/SingleChallenge";
 const Challlenges = () => {
   return (
     <div>
-      {challengesInfos.map((challenge) => (
-        <article className={styles.challenge} key={challenge.id}>
-          <Link className={styles.challengeLink} href={challenge.linkHref()}>
-            {challenge.urlName} {challenge.onProgress && "(not finished)"}
-          </Link>
-          <p>{challenge.challenge}</p>
-        </article>
+      {challengesInfos.fromYouTube.map((challenge) => (
+        <SingleChallenge key={challenge.id} challenge={challenge} />
       ))}
     </div>
   );
