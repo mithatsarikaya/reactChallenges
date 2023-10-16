@@ -6,6 +6,8 @@
     border: 2px solid salmon;
     padding: .5rem;
     cursor: pointer;
+    padding: 10px;
+    
 }
 
 .challenge:hover{
@@ -14,8 +16,7 @@
 }
 
 .challengeArticle{
-    padding: 10px;
-    width: 200px;
+    width: max-content;
     text-align: center;
     color: salmon;
 }
@@ -25,20 +26,3 @@
     font-style: italic;
 }
 
-@media( max-width:541px){
-
-    .challenge{
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-    }
-
-    .challengeArticle{
-        width: 130px !important;
-        padding: 5px;
-        width: max-content;
-        border: 2px solid salmon;
-        text-align: center;
-    }   
-
-    
-}

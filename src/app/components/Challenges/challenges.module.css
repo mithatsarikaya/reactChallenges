@@ -1,23 +1,6 @@
 .container{
     display: grid;
-    grid-template-columns: 1fr 1fr ;
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
 }
 
-@media( max-width:541px){
-
-    .challenge{
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-    }
-
-    .challengeLink{
-        width: 130px !important;
-        padding: 5px;
-        width: max-content;
-        border: 2px solid salmon;
-        text-align: center;
-    }   
-
-    
-}
