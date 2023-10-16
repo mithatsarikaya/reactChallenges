@@ -1,20 +1,28 @@
 .challenge{
     display: flex;
-    gap: 1rem;
+    flex-direction: column;
+    gap: 2rem;
     align-items: center;
+    border: 2px solid salmon;
+    padding: .5rem;
+    cursor: pointer;
 }
 
+.challenge:hover{
+    color:salmon;
+    scale: 1.1;    
+}
 
-.challengeLink{
+.challengeArticle{
     padding: 10px;
     width: 200px;
-    border: 2px solid salmon;
     text-align: center;
+    color: salmon;
 }
 
-.challengeLink:hover{
-    color:salmon;
-    background-color: white;
+
+.challengeDesc{
+    font-style: italic;
 }
 
 @media( max-width:541px){
@@ -24,7 +32,7 @@
         grid-template-columns: 1fr 2fr;
     }
 
-    .challengeLink{
+    .challengeArticle{
         width: 130px !important;
         padding: 5px;
         width: max-content;

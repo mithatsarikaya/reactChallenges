@@ -4,12 +4,12 @@ import { TChallangeInfo } from "@/statics/challengesInfos";
 
 const SingleChallenge = ({ challenge }: { challenge: TChallangeInfo }) => {
   return (
-    <article className={styles.challenge} key={challenge.id}>
-      <Link className={styles.challengeLink} href={challenge.linkHref()}>
+    <Link className={styles.challenge} href={challenge.linkHref()}>
+      <article className={styles.challengeArticle} key={challenge.id}>
         {challenge.urlName} {challenge.onProgress && "(not finished)"}
-      </Link>
-      <p>{challenge.challenge}</p>
-    </article>
+        <p className={styles.challengeDesc}>{challenge.challenge}</p>
+      </article>
+    </Link>
   );
 };
 

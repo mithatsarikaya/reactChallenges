@@ -7,76 +7,71 @@ export type TChallangeInfo = {
   onProgress?: boolean;
 };
 
-export type TChallangeInfoArray = {
-  fromYouTube: TChallangeInfo[];
-  fromFrontendMentor?: TChallangeInfo[];
-};
+export type TChallangeInfoArrayObject = TChallangeInfo[];
 
 let mainUrlForChallenges = "challenges/";
 
-const challengesInfos: TChallangeInfoArray = {
-  fromYouTube: [
-    {
-      id: 0,
-      urlName: "drawcircle",
-      linkHref() {
-        return mainUrlForChallenges.concat(this.urlName);
-      },
-      challenge: "Add circle to the point clicked by user",
-      inspiredBy:
-        "https://www.youtube.com/watch?v=A0BmLYHLPZs&list=PL6x5Q-Sj_Bla3_wMqhETxMBjFml0XJNPI&index=4",
+const challengesInfos: TChallangeInfoArrayObject = [
+  {
+    id: 0,
+    urlName: "drawcircle",
+    linkHref() {
+      return mainUrlForChallenges.concat(this.urlName);
     },
-    {
-      id: 1,
-      urlName: "pickcolor",
-      linkHref() {
-        return mainUrlForChallenges.concat(this.urlName);
-      },
-      challenge: "Pick right color that show on the screen",
-      inspiredBy:
-        "https://www.youtube.com/watch?v=QNYljS0_TOE&list=PL6x5Q-Sj_Bla3_wMqhETxMBjFml0XJNPI&index=1&t=2s",
+    challenge: "Add circle to the point clicked by user",
+    inspiredBy:
+      "https://www.youtube.com/watch?v=A0BmLYHLPZs&list=PL6x5Q-Sj_Bla3_wMqhETxMBjFml0XJNPI&index=4",
+  },
+  {
+    id: 1,
+    urlName: "pickcolor",
+    linkHref() {
+      return mainUrlForChallenges.concat(this.urlName);
     },
-    {
-      id: 2,
-      urlName: "getsynonyms",
-      challenge: "Get synonyms of the input from an API",
-      inspiredBy: "https://www.youtube.com/watch?v=-Rtlnsgbc0k&t=645s",
-      linkHref() {
-        return mainUrlForChallenges.concat(this.urlName);
-      },
-      onProgress: false,
+    challenge: "Pick right color that show on the screen",
+    inspiredBy:
+      "https://www.youtube.com/watch?v=QNYljS0_TOE&list=PL6x5Q-Sj_Bla3_wMqhETxMBjFml0XJNPI&index=1&t=2s",
+  },
+  {
+    id: 2,
+    urlName: "getsynonyms",
+    challenge: "Get synonyms of the input from an API",
+    inspiredBy: "https://www.youtube.com/watch?v=-Rtlnsgbc0k&t=645s",
+    linkHref() {
+      return mainUrlForChallenges.concat(this.urlName);
     },
-    {
-      id: 3,
-      urlName: "getinqueue",
-      challenge: "Put given number to the least sized queue",
-      inspiredBy: "https://www.youtube.com/watch?v=B9fmr1TpKHE",
-      linkHref() {
-        return mainUrlForChallenges.concat(this.urlName);
-      },
-      onProgress: false,
+    onProgress: false,
+  },
+  {
+    id: 3,
+    urlName: "getinqueue",
+    challenge: "Put given number to the least sized queue",
+    inspiredBy: "https://www.youtube.com/watch?v=B9fmr1TpKHE",
+    linkHref() {
+      return mainUrlForChallenges.concat(this.urlName);
     },
-    {
-      id: 4,
-      urlName: "tictactoe",
-      challenge: "classic tictactoe game",
-      linkHref() {
-        return mainUrlForChallenges.concat(this.urlName);
-      },
-      onProgress: false,
+    onProgress: false,
+  },
+  {
+    id: 4,
+    urlName: "tictactoe",
+    challenge: "classic tictactoe game",
+    linkHref() {
+      return mainUrlForChallenges.concat(this.urlName);
     },
-  ],
-  fromFrontendMentor: [
-    {
-      id: 5,
-      urlName: "resultssummarycomponent",
-      challenge: " building out this results summary component",
-      linkHref() {
-        return mainUrlForChallenges.concat(this.urlName);
-      },
-      onProgress: true,
+    onProgress: false,
+  },
+  {
+    id: 5,
+    urlName: "resultssummarycomponent",
+    challenge: " building out this results summary component",
+    linkHref() {
+      return mainUrlForChallenges.concat(this.urlName);
     },
-  ],
-};
+    inspiredBy:
+      "https://www.frontendmentor.io/challenges/results-summary-component-CE_K6s0maV",
+    onProgress: true,
+  },
+];
 
 export default challengesInfos;
