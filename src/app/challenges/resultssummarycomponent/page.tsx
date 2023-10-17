@@ -17,7 +17,21 @@ const ResultsSummaryComponent = () => {
       </section>
       <section className={styles.summarySection}>
         <p>Summary</p>
-        <div className={styles.skills}></div>
+        <div className={styles.skills}>
+          {data.map((d) => (
+            <article key={d.icon}>
+              <div className={styles.imgAndSkill}>
+                <img src={d.icon} alt="" />
+                <p>{d.category}</p>
+              </div>
+              <div className={styles.score}>
+                <p>{d.score}</p>
+                <p>/100</p>
+              </div>
+            </article>
+          ))}
+        </div>
+        <button>Continue</button>
       </section>
     </div>
   );

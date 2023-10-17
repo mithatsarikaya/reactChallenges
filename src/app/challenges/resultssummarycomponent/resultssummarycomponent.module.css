@@ -1,7 +1,40 @@
+
+
 .container{
     font-family: HankenGrotesk;
     src: url("/public/resultssummarycomponent/assets/fonts/HankenGrotesk-VariableFont_wght.ttf");
-    background-color: var(--light-red);
     background-color: white;
+    display: grid;
+    place-content: center;
+    height: 100vh;
+    grid-template-columns: 1fr 1fr;
 }
 
+.resultSection{
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+    margin-left: auto;
+    border-radius: 20px;
+}
+
+.resultSection, .resultSection>*{
+    background-color: hsl(252, 100%, 67%);
+    /* background-color: var(--cobalt-blue); */
+}
+
+.resultSummary>*{
+    background-color: inherit;
+}
+
+.summarySection{
+    background-color: white !important;
+    color: black;
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-right: auto;
+}
