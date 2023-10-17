@@ -19,7 +19,7 @@ const ResultsSummaryComponent = () => {
         <p>Summary</p>
         <div className={styles.skills}>
           {data.map((d) => (
-            <article key={d.icon}>
+            <article className={styles.skill} key={d.icon}>
               <div className={styles.imgAndSkill}>
                 <img src={d.icon} alt="" />
                 <p>{d.category}</p>
@@ -31,7 +31,7 @@ const ResultsSummaryComponent = () => {
             </article>
           ))}
         </div>
-        <button>Continue</button>
+        <button className={styles.continueButton}>Continue</button>
       </section>
     </div>
   );

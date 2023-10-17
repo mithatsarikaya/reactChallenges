@@ -1,40 +1,99 @@
-
+@font-face {
+    font-family: 'HankenGrotesk';
+    font-display: swap;
+    font-weight: 100 900;
+    src: url("/public/resultssummarycomponent/assets/fonts/HankenGrotesk-VariableFont_wght.ttf")
+         format('truetype');
+  }
 
 .container{
-    font-family: HankenGrotesk;
-    src: url("/public/resultssummarycomponent/assets/fonts/HankenGrotesk-VariableFont_wght.ttf");
+    /* resultssummarychallenge */
+  --light-red: hsl(0, 100%, 67%);
+  --orangey-yellow: hsl(39, 100%, 56%);
+  --green-teal: hsl(166, 100%, 37%);
+  --cobalt-blue: hsl(234, 85%, 45%);
+  /* background */
+  --light-slate-blue: hsl(252, 100%, 67%);
+  --violet-blue: hsla(256, 72%, 46%, 1);
+  --light-royal-blue: hsl(241, 81%, 54%);
+  /* background */
+  /* circle */
+  --persian-blue: hsla(241, 72%, 46%, 0);
+  /* circle */
+  /* resultssummarychallenge */
+
+  --gradient-primary: linear-gradient(to left top, blue, red);
+
+  --font-family-default: 'HankenGrotesk', sans-serif;
     background-color: white;
     display: grid;
     place-content: center;
     height: 100vh;
     grid-template-columns: 1fr 1fr;
+    font-family: var(--font-family-default);
 }
-
 .resultSection{
-    width: 33%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     text-align: center;
     margin-left: auto;
+    gap: 20px;
     border-radius: 20px;
+    padding: 30px;
+    background-color: var(--cobalt-blue);
 }
 
-.resultSection, .resultSection>*{
-    background-color: hsl(252, 100%, 67%);
-    /* background-color: var(--cobalt-blue); */
+.resultSummary{
+    aspect-ratio: 1/1;
+    margin:auto;
+    padding: 30px;
+    border-radius: 50%;
+    background-color: var(--violet-blue);
 }
 
 .resultSummary>*{
-    background-color: inherit;
+    background-color: var(--violet-blue);
 }
 
+
+
+
 .summarySection{
-    background-color: white !important;
-    color: black;
-    width: 33%;
-    display: flex;
     flex-direction: column;
+    /* background-color: white; */
+    color: black;
+    display: flex;
     justify-content: space-around;
     margin-right: auto;
+    /* text-align: center; */
+}
+
+/* .summarySection>*,
+.skills>*,
+.imgAndSkill>*,
+.imgAndSkill,
+.score>*
+{
+    background-color: white;
+    color: black;
+} */
+
+
+.skill{
+    display: flex;
+    justify-content: space-around;
+}
+
+.imgAndSkill{
+    display: flex;
+    align-items: center;
+}
+
+.score{
+    display: flex;
+}
+
+.continueButton:hover{
+    outline: none;
 }
