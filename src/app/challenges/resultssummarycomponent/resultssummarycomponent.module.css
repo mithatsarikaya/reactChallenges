@@ -1,0 +1,7 @@
+.container{
+    font-family: HankenGrotesk;
+    src: url("/public/resultssummarycomponent/assets/fonts/HankenGrotesk-VariableFont_wght.ttf");
+    background-color: var(--light-red);
+    background-color: white;
+}
+
