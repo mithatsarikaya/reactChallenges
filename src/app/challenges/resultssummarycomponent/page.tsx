@@ -6,19 +6,19 @@ const ResultsSummaryComponent = () => {
     <div className={styles.container}>
       <main className={styles.results}>
         <section className={styles.resultSection}>
-          <p>Your Result</p>
+          <p className={styles.sectionTitle}>Your Result</p>
           <div className={styles.resultSummary}>
             <h1>76</h1>
             <p>of 100</p>
           </div>
-          <p>Great</p>
+          <p className={styles.great}>Great</p>
           <p className={styles.resultDesc}>
             You scored higher than 65% of the people who have taken these tests.
           </p>
         </section>
 
         <section className={styles.summarySection}>
-          <p>Summary</p>
+          <p className={styles.sectionTitle}>Summary</p>
           <div className={styles.skills}>
             {data.map((d) => (
               <article className={styles.skill} key={d.icon}>
@@ -27,8 +27,8 @@ const ResultsSummaryComponent = () => {
                   <p>{d.category}</p>
                 </div>
                 <div className={styles.score}>
-                  <p>{d.score}</p>
-                  <p>/100</p>
+                  <p>{`${d.score}`}</p>
+                  <p> / 100</p>
                 </div>
               </article>
             ))}
