@@ -1,25 +1,22 @@
-
-
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
-a{
+a {
   text-decoration: none;
   color: inherit;
 }
 
-a:hover{
+a:hover {
   text-decoration: underline;
 }
 
-button{
+button {
   cursor: pointer;
 }
 
-button:hover{
+button:hover {
   outline: black 4px solid;
 }
-
