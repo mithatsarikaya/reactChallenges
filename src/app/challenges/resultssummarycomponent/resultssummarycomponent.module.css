@@ -27,62 +27,76 @@
     var(--light-royal-blue)
   );
 
+  --fw-bold: 700;
+  --fw-black: 800;
+  --fw-regular: 500;
+
+  --fs-400: 1.125rem;
+  --fs-500: 1.25rem;
+  --fs-600: 1.5rem;
+  --fs-700: 1.75rem;
+  --fs-800: 2rem;
+  --fs-900: 5rem;
+
   --font-family-default: "HankenGrotesk", sans-serif;
+
+  display: grid;
+  place-content: center;
   background-color: white;
+}
+.results {
   display: grid;
   place-content: center;
   height: 100vh;
   grid-template-columns: 1fr 1fr;
   font-family: var(--font-family-default);
+  max-width: 46rem;
+  border: 2px salmon solid;
 }
 .resultSection {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  text-align: center;
-  margin-left: auto;
-  gap: 20px;
-  border-radius: 20px;
+  /* display: flex; */
   padding: 30px;
-  background-color: var(--green-teal);
+  display: grid;
+  gap: 1rem;
+  text-align: center;
+  border-radius: 20px;
+  background: var(--gradient-primary);
 }
 
 .resultSummary {
+  display: grid;
+  place-content: center;
   aspect-ratio: 1/1;
   margin: auto;
-  padding: 30px;
+  width: 12rem;
   border-radius: 50%;
-  /* background-color: var(--violet-blue); */
-  background: var(--gradient-primary);
+  background: var(--violet-blue);
 }
 
 .resultSummary > * {
   background-color: var(--violet-blue);
 }
 
-.summarySection {
-  flex-direction: column;
-  /* background-color: white; */
-  color: black;
-  display: flex;
-  justify-content: space-around;
-  margin-right: auto;
-  /* text-align: center; */
+.resultSummary h1 {
+  font-size: var(--fs-900);
+  font-weight: var(--fw-black);
 }
 
-/* .summarySection>*,
-.skills>*,
-.imgAndSkill>*,
-.imgAndSkill,
-.score>*
-{
-    background-color: white;
-    color: black;
-} */
+.summarySection {
+  display: grid;
+  color: black;
+  padding: 30px 1rem;
+  gap: 2rem;
+}
+
+.skills {
+  display: grid;
+  gap: 1rem;
+}
 
 .skill {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .imgAndSkill {
