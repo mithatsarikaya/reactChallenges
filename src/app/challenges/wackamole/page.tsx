@@ -10,6 +10,7 @@ let initialState = Array(9)
 
 const WackAMole = () => {
   const [cells, setCells] = useState(initialState);
+  const [score, setScore] = useState(0);
 
   const showRandomMole = (numberToChange: number) => {
     setCells((prevCells) =>
@@ -19,16 +20,35 @@ const WackAMole = () => {
     );
   };
 
+  const hideTheMole = (idToHide: number) => {
+    setCells((prevCells) =>
+      prevCells.map((cell) =>
+        cell.id == idToHide ? { ...cell, isHole: true } : cell
+      )
+    );
+  };
+
   const getRandomNumberFromOnlyHoles = () => {
     let holeIDs = cells.filter((cell) => cell.isHole).map((cell) => cell.id);
     return holeIDs[Math.floor(Math.random() * holeIDs.length)];
+  };
+
+  const incrementScore = () => {
+    setScore((prev) => prev + 1);
+  };
+
+  const handleClick = (cell: (typeof cells)[0]) => {
+    if (!cell.isHole) {
+      hideTheMole(cell.id);
+      incrementScore();
+    }
   };
 
   useEffect(() => {
     const interval = setInterval(() => {
       //   let randomNumber = Math.floor(Math.random() * cells.length);
       showRandomMole(getRandomNumberFromOnlyHoles());
-    }, 500);
+    }, 1000);
 
     return () => {
       clearInterval(interval);
@@ -40,10 +60,16 @@ const WackAMole = () => {
   return (
     <main>
       <div className={styles.container}>
-        <h1 className={styles.score}>Score 0</h1>
+        <h1 className={styles.score}>Score {score}</h1>
         <article className={styles.photosContainer}>
           {cells.map((cell) => (
-            <img key={cell.id} src={cell.isHole ? holeUrl : moleUrl} alt="" />
+            <img
+              className={styles.photo}
+              onClick={(e) => handleClick(cell)}
+              key={cell.id}
+              src={cell.isHole ? holeUrl : moleUrl}
+              alt=""
+            />
           ))}
         </article>
       </div>
