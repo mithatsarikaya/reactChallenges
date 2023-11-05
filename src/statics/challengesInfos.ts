@@ -70,6 +70,16 @@ const challengesInfos: TChallangeInfoArrayObject = [
     },
     inspiredBy:
       "https://www.frontendmentor.io/challenges/results-summary-component-CE_K6s0maV",
+    onProgress: false,
+  },
+  {
+    id: 6,
+    urlName: "wackamole",
+    challenge: "wack-a-mole game",
+    linkHref() {
+      return mainUrlForChallenges.concat(this.urlName);
+    },
+    inspiredBy: "https://www.youtube.com/watch?v=x01eEjSFKig&t=58s",
     onProgress: true,
   },
 ];
