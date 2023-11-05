@@ -61,7 +61,6 @@
   grid-template-columns: 1fr 1fr;
   font-family: var(--font-family-default);
   max-width: 46rem;
-  border: 2px salmon solid;
 }
 .resultSection {
   /* display: flex; */
@@ -104,7 +103,9 @@
   display: grid;
   color: black;
   padding: 30px var(--padding-x);
-  gap: 2rem;
+  gap: 3rem;
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.14);
+  border-radius: 20px;
 }
 
 .skills {
@@ -120,6 +121,7 @@
 .imgAndSkill {
   display: flex;
   align-items: center;
+  gap: 10px;
 }
 
 .score {
@@ -134,6 +136,7 @@
   padding: 1rem 1rem;
   border-radius: 100vw;
   line-height: 1;
+  height: 50px;
 }
 .continueButton:hover {
   outline: none;
