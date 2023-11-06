@@ -42,7 +42,7 @@ const WackAMole = () => {
     return cells.map((cell) => cell.isHole).every((hole) => !hole);
   };
 
-  const handleClick = (cell: (typeof cells)[0]) => {
+  const handleHitMole = (cell: (typeof cells)[0]) => {
     if (!cell.isHole) {
       hideTheMole(cell.id);
       incrementScore();
@@ -56,7 +56,7 @@ const WackAMole = () => {
       !checkIfNoHole() &&
         !isLost &&
         showRandomMole(getRandomNumberFromOnlyHoles());
-    }, 1000);
+    }, 750);
 
     checkIfNoHole() && setIsLost(true);
 
@@ -67,7 +67,9 @@ const WackAMole = () => {
 
   console.log("checkrender");
 
-  const handleRestart = (e: MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleRestart = (
+    e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+  ) => {
     e.preventDefault();
     setScore(0);
     setIsLost(false);
@@ -90,7 +92,7 @@ const WackAMole = () => {
           {cells.map((cell) => (
             <img
               className={styles.photo}
-              onClick={(e) => handleClick(cell)}
+              onClick={(e) => handleHitMole(cell)}
               key={cell.id}
               src={cell.isHole ? holeUrl : moleUrl}
               alt=""

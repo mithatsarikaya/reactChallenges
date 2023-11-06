@@ -11,6 +11,7 @@
 
 .photosContainer {
   width: fit-content;
+  position: relative;
   margin: auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -34,11 +35,21 @@
 
 @media only screen and (max-width: 825px) {
   .photo {
-    width: 100px;
+    width: 200px;
   }
 
   .againButton {
     padding: 0;
     font-size: small;
+  }
+}
+@media only screen and (max-width: 653px) {
+  .photo {
+    width: 100px;
+  }
+}
+@media only screen and (max-width: 391px) {
+  .photo {
+    width: 75px;
   }
 }
