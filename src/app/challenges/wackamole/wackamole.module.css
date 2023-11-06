@@ -16,6 +16,29 @@
   grid-template-columns: repeat(3, 1fr);
 }
 
+.againButton {
+  padding: 20px 40px;
+  font-size: large;
+  opacity: 0.85;
+  position: absolute;
+  background-color: black;
+  color: red;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .photo {
   cursor: pointer;
+}
+
+@media only screen and (max-width: 825px) {
+  .photo {
+    width: 100px;
+  }
+
+  .againButton {
+    padding: 0;
+    font-size: small;
+  }
 }

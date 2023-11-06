@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import styles from "./wackamole.module.css";
 
 let moleUrl = "/wackamole/mole.png";
@@ -11,6 +11,7 @@ let initialState = Array(9)
 const WackAMole = () => {
   const [cells, setCells] = useState(initialState);
   const [score, setScore] = useState(0);
+  const [isLost, setIsLost] = useState(false);
 
   const showRandomMole = (numberToChange: number) => {
     setCells((prevCells) =>
@@ -52,8 +53,12 @@ const WackAMole = () => {
     const interval = setInterval(() => {
       //   let randomNumber = Math.floor(Math.random() * cells.length);
 
-      !checkIfNoHole() && showRandomMole(getRandomNumberFromOnlyHoles());
+      !checkIfNoHole() &&
+        !isLost &&
+        showRandomMole(getRandomNumberFromOnlyHoles());
     }, 1000);
+
+    checkIfNoHole() && setIsLost(true);
 
     return () => {
       clearInterval(interval);
@@ -62,11 +67,26 @@ const WackAMole = () => {
 
   console.log("checkrender");
 
+  const handleRestart = (e: MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    setScore(0);
+    setIsLost(false);
+    setCells(initialState);
+  };
+
   return (
     <main>
       <div className={styles.container}>
         <h1 className={styles.score}>Score {score}</h1>
         <article className={styles.photosContainer}>
+          {isLost && (
+            <button
+              onClick={(e) => handleRestart(e)}
+              className={styles.againButton}
+            >
+              You Lost, Play Again?
+            </button>
+          )}
           {cells.map((cell) => (
             <img
               className={styles.photo}
