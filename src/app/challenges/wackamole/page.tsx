@@ -37,6 +37,10 @@ const WackAMole = () => {
     setScore((prev) => prev + 1);
   };
 
+  const checkIfNoHole = () => {
+    return cells.map((cell) => cell.isHole).every((hole) => !hole);
+  };
+
   const handleClick = (cell: (typeof cells)[0]) => {
     if (!cell.isHole) {
       hideTheMole(cell.id);
@@ -47,7 +51,8 @@ const WackAMole = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       //   let randomNumber = Math.floor(Math.random() * cells.length);
-      showRandomMole(getRandomNumberFromOnlyHoles());
+
+      !checkIfNoHole() && showRandomMole(getRandomNumberFromOnlyHoles());
     }, 1000);
 
     return () => {
