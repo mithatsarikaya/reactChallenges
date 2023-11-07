@@ -1,4 +1,12 @@
+"use client";
+import { MouseEvent, useEffect, useState } from "react";
 import styles from "./memorynumbergame.module.css";
+
+type CardsType = {
+  num: number;
+  isPaired: boolean;
+  isClicked: boolean;
+}[];
 
 const MemoryNumberGame = () => {
   const numbers = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -19,19 +27,53 @@ const MemoryNumberGame = () => {
     while (isNumberAlreadyExistTwoTimes(element, randomNumbersArray)) {
       element = getRandomNumberFromNumbersArray();
     }
-
     randomNumbersArray.push(element);
   }
+
+  let initialCards = randomNumbersArray.map((card) => ({
+    num: card,
+    isPaired: false,
+    isClicked: false,
+  }));
+
+  const [cards, setCards] = useState<CardsType | null>(null);
+  useEffect(() => {
+    setCards(initialCards);
+  }, []);
+
+  //   TODO: user must only click two of them.
+  //   TODO: add animation to do clicked card
+  //   TODO: when paired, make them visible and disabled
+  const handleCardClick = (
+    e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
+    indexNumber: number
+  ) => {
+    e.preventDefault();
+    console.log("hi");
+    setCards((prevCards) =>
+      prevCards.map((p, idx) =>
+        idx == indexNumber ? { ...p, isClicked: !p.isClicked } : p
+      )
+    );
+  };
 
   return (
     <main>
       <div className={styles.container}>
         <article className={styles.board}>
-          {randomNumbersArray.map((num, idx) => (
-            <button key={idx} className={styles.card}>
-              {num}
-            </button>
-          ))}
+          {cards &&
+            cards.map((card, idx) => (
+              <button
+                style={{
+                  backgroundColor: `${card.isClicked ? "red" : "white"}`,
+                }}
+                onClick={(e) => handleCardClick(e, idx)}
+                key={idx}
+                className={styles.card}
+              >
+                {card.num}
+              </button>
+            ))}
         </article>
       </div>
     </main>
