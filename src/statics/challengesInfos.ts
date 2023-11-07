@@ -80,6 +80,16 @@ const challengesInfos: TChallangeInfoArrayObject = [
       return mainUrlForChallenges.concat(this.urlName);
     },
     inspiredBy: "https://www.youtube.com/watch?v=x01eEjSFKig&t=58s",
+    onProgress: false,
+  },
+  {
+    id: 7,
+    urlName: "memorynumbergame",
+    challenge: "pick the pair of numbers",
+    linkHref() {
+      return mainUrlForChallenges.concat(this.urlName);
+    },
+    inspiredBy: "https://www.youtube.com/watch?v=5UcfBfSP2T4&t=3s",
     onProgress: true,
   },
 ];
