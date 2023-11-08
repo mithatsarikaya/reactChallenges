@@ -43,9 +43,9 @@ const MemoryNumberGame = () => {
     setCards(initialCards);
   }, []);
 
-  //   TODO: user must only click two of them.
-  //   TODO: add animation to do clicked card
-  //   TODO: when paired, make them visible and disabled
+  //   TODOne: user must only click two of them.
+  //   TODOne: add animation to do clicked card
+  //   TODOne: when paired, make them visible and disabled
   const handleCardClick = (
     e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
     indexNumber: number
@@ -61,9 +61,11 @@ const MemoryNumberGame = () => {
     );
   };
 
-  const makeAllCardUnclicked = () => {
+  const makeAllNotPairedCardUnclicked = () => {
     setCards((prevCards) =>
-      prevCards.map((card) => ({ ...card, isClicked: false }))
+      prevCards.map((card) =>
+        !card.isPaired ? { ...card, isClicked: false } : card
+      )
     );
   };
 
@@ -74,7 +76,7 @@ const MemoryNumberGame = () => {
   let numberCardsClickedNotPaired = cardsClickedNotPaired.length;
 
   if (numberCardsClickedNotPaired > 2) {
-    makeAllCardUnclicked();
+    makeAllNotPairedCardUnclicked();
   }
   const areChosenTwoCardsSame = () => {
     let numberFromCardsClickedNotPaired = cardsClickedNotPaired[0]?.num;
@@ -86,15 +88,20 @@ const MemoryNumberGame = () => {
     );
   };
 
-  if (numberCardsClickedNotPaired == 2 && areChosenTwoCardsSame()) {
-    setCards((prevCards) =>
-      prevCards.map((card) =>
-        !card.isPaired && card.isClicked ? { ...card, isPaired: true } : card
-      )
-    );
-  }
+  const isPairedSuccesfull = () => {
+    if (numberCardsClickedNotPaired == 2 && areChosenTwoCardsSame()) {
+      setCards((prevCards) =>
+        prevCards.map((card) =>
+          !card.isPaired && card.isClicked ? { ...card, isPaired: true } : card
+        )
+      );
+    }
+  };
+  isPairedSuccesfull();
 
   console.log(areChosenTwoCardsSame());
+
+  let clickedCardClassNames = `${styles.card} ${styles.cardClicked}`;
 
   return (
     <main>
@@ -104,13 +111,13 @@ const MemoryNumberGame = () => {
           {cards.length > 1 &&
             cards.map((card, idx) => (
               <button
-                style={{
-                  backgroundColor: `${card.isClicked ? "red" : "white"}`,
-                }}
+                // style={{
+                //   backgroundColor: `${card.isClicked ? "red" : "white"}`,
+                // }}
                 disabled={card.isPaired}
                 onClick={(e) => handleCardClick(e, idx)}
                 key={idx}
-                className={styles.card}
+                className={card.isClicked ? clickedCardClassNames : styles.card}
               >
                 {card.num}
               </button>

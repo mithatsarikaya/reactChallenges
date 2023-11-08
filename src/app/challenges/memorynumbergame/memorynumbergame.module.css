@@ -14,4 +14,17 @@
   aspect-ratio: 1;
   height: 100px;
   font-size: 5rem;
+  color: white;
+  background-color: white;
+  transition: opacity 2s;
+}
+
+.cardClicked {
+  color: black;
+  pointer-events: none;
+}
+
+.card:disabled {
+  opacity: 0.6;
+  background-color: pink;
 }
