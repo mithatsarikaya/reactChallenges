@@ -36,7 +36,9 @@ const MemoryNumberGame = () => {
     isClicked: false,
   }));
 
-  const [cards, setCards] = useState<CardsType | null>(null);
+  const [cards, setCards] = useState<CardsType>([
+    { isClicked: false, isPaired: false, num: 0 },
+  ]);
   useEffect(() => {
     setCards(initialCards);
   }, []);
@@ -51,22 +53,41 @@ const MemoryNumberGame = () => {
     e.preventDefault();
     console.log("hi");
     setCards((prevCards) =>
-      prevCards.map((p, idx) =>
-        idx == indexNumber ? { ...p, isClicked: !p.isClicked } : p
-      )
+      prevCards != null
+        ? prevCards.map((p, idx) =>
+            idx == indexNumber ? { ...p, isClicked: !p.isClicked } : p
+          )
+        : prevCards
     );
   };
+
+  const makeAllCardUnclicked = () => {
+    setCards((prevCards) =>
+      prevCards.map((card) => ({ ...card, isClicked: false }))
+    );
+  };
+
+  let numberOfCardsClicked = cards.filter((card) => card.isClicked).length;
+  if (numberOfCardsClicked > 2) {
+    makeAllCardUnclicked();
+  }
+
+  const areChosenTwoCardsSame = () => {};
+
+  console.log(areChosenTwoCardsSame());
 
   return (
     <main>
       <div className={styles.container}>
         <article className={styles.board}>
-          {cards &&
+          {/* state starts with one element, i do not want to show it */}
+          {cards.length > 1 &&
             cards.map((card, idx) => (
               <button
                 style={{
                   backgroundColor: `${card.isClicked ? "red" : "white"}`,
                 }}
+                disabled={card.isPaired}
                 onClick={(e) => handleCardClick(e, idx)}
                 key={idx}
                 className={styles.card}
