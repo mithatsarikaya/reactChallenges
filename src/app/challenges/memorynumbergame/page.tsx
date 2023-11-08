@@ -39,6 +39,7 @@ const MemoryNumberGame = () => {
   const [cards, setCards] = useState<CardsType>([
     { isClicked: false, isPaired: false, num: 0 },
   ]);
+  const [score, setScore] = useState(0);
   useEffect(() => {
     setCards(initialCards);
   }, []);
@@ -46,50 +47,76 @@ const MemoryNumberGame = () => {
   //   TODOne: user must only click two of them.
   //   TODOne: add animation to do clicked card
   //   TODOne: when paired, make them visible and disabled
+
+  const showCard = (indexNumber: number) => {
+    setCards((prevCards) => {
+      console.log(prevCards.filter((card) => card.isClicked).length);
+      return prevCards.map((p, idx) =>
+        idx == indexNumber && !p.isPaired
+          ? { ...p, isClicked: !p.isClicked }
+          : p
+      );
+    });
+  };
   const handleCardClick = (
     e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
     indexNumber: number
   ) => {
     e.preventDefault();
-    console.log("hi");
-    setCards((prevCards) =>
-      prevCards != null
-        ? prevCards.map((p, idx) =>
-            idx == indexNumber ? { ...p, isClicked: !p.isClicked } : p
-          )
-        : prevCards
-    );
+    // showCard(indexNumber);
+    setScore((prevScore) => prevScore + 1);
+
+    //when 2 cards selected and they are not same then on 3rd click show the card and close first 2 cards
+    setCards((prevCard) => {
+      if (
+        prevCard.filter((card) => card.isClicked && !card.isPaired).length > 1
+      ) {
+        console.log(
+          prevCard.filter((card) => card.isClicked && !card.isPaired)
+        );
+        return prevCard.map((card, idx) =>
+          idx != indexNumber && !card.isPaired
+            ? { ...card, isClicked: false }
+            : { ...card, isClicked: true }
+        );
+      } else {
+        return prevCard.map((p, idx) =>
+          idx == indexNumber && !p.isPaired
+            ? { ...p, isClicked: !p.isClicked }
+            : p
+        );
+      }
+    });
   };
 
-  const makeAllNotPairedCardUnclicked = () => {
-    setCards((prevCards) =>
-      prevCards.map((card) =>
-        !card.isPaired ? { ...card, isClicked: false } : card
-      )
-    );
-  };
+  console.log(cards);
+
+  // const makeAllNotPairedCardUnclicked = () => {
+  //   setCards((prevCards) =>
+  //     prevCards.map((card) =>
+  //       !card.isPaired ? { ...card, isClicked: false } : card
+  //     )
+  //   );
+  // };
 
   let cardsClickedNotPaired = cards.filter(
     (card) => card.isClicked && !card.isPaired
   );
 
   let numberCardsClickedNotPaired = cardsClickedNotPaired.length;
+  // console.log(numberCardsClickedNotPaired);
 
-  if (numberCardsClickedNotPaired > 2) {
-    makeAllNotPairedCardUnclicked();
-  }
   const areChosenTwoCardsSame = () => {
-    let numberFromCardsClickedNotPaired = cardsClickedNotPaired[0]?.num;
+    let firstClickedCardValue = cardsClickedNotPaired[0]?.num;
     return (
       numberCardsClickedNotPaired == 2 &&
-      cardsClickedNotPaired.every(
-        (card) => card.num == numberFromCardsClickedNotPaired
-      )
+      cardsClickedNotPaired.every((card) => card.num == firstClickedCardValue)
     );
   };
 
   const isPairedSuccesfull = () => {
     if (numberCardsClickedNotPaired == 2 && areChosenTwoCardsSame()) {
+      console.log("paired");
       setCards((prevCards) =>
         prevCards.map((card) =>
           !card.isPaired && card.isClicked ? { ...card, isPaired: true } : card
@@ -99,21 +126,32 @@ const MemoryNumberGame = () => {
   };
   isPairedSuccesfull();
 
-  console.log(areChosenTwoCardsSame());
-
   let clickedCardClassNames = `${styles.card} ${styles.cardClicked}`;
+
+  // useEffect(() => {
+  //   if (numberCardsClickedNotPaired == 2) {
+  //     makeAllNotPairedCardUnclicked();
+  //   }
+  // }, [numberCardsClickedNotPaired]);
+
+  const isGameFinished: boolean = cards
+    .map((card) => card.isPaired)
+    .every((isPaired) => isPaired);
 
   return (
     <main>
       <div className={styles.container}>
+        <h1 className={styles.score}>{score}</h1>
         <article className={styles.board}>
+          {isGameFinished && (
+            <button className={styles.replayTheGame}>
+              Game Finished, Play Again?
+            </button>
+          )}
           {/* state starts with one element, i do not want to show it */}
           {cards.length > 1 &&
             cards.map((card, idx) => (
               <button
-                // style={{
-                //   backgroundColor: `${card.isClicked ? "red" : "white"}`,
-                // }}
                 disabled={card.isPaired}
                 onClick={(e) => handleCardClick(e, idx)}
                 key={idx}

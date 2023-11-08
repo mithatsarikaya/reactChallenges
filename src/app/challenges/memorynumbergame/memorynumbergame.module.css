@@ -4,10 +4,23 @@
   place-content: center;
 }
 
+.score {
+  text-align: center;
+  font-size: 3rem;
+}
+
 .board {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
+}
+
+.replayTheGame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .card {
