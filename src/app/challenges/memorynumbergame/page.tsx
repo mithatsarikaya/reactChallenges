@@ -67,12 +67,32 @@ const MemoryNumberGame = () => {
     );
   };
 
-  let numberOfCardsClicked = cards.filter((card) => card.isClicked).length;
-  if (numberOfCardsClicked > 2) {
+  let cardsClickedNotPaired = cards.filter(
+    (card) => card.isClicked && !card.isPaired
+  );
+
+  let numberCardsClickedNotPaired = cardsClickedNotPaired.length;
+
+  if (numberCardsClickedNotPaired > 2) {
     makeAllCardUnclicked();
   }
+  const areChosenTwoCardsSame = () => {
+    let numberFromCardsClickedNotPaired = cardsClickedNotPaired[0]?.num;
+    return (
+      numberCardsClickedNotPaired == 2 &&
+      cardsClickedNotPaired.every(
+        (card) => card.num == numberFromCardsClickedNotPaired
+      )
+    );
+  };
 
-  const areChosenTwoCardsSame = () => {};
+  if (numberCardsClickedNotPaired == 2 && areChosenTwoCardsSame()) {
+    setCards((prevCards) =>
+      prevCards.map((card) =>
+        !card.isPaired && card.isClicked ? { ...card, isPaired: true } : card
+      )
+    );
+  }
 
   console.log(areChosenTwoCardsSame());
 
