@@ -138,13 +138,24 @@ const MemoryNumberGame = () => {
     .map((card) => card.isPaired)
     .every((isPaired) => isPaired);
 
+  const restartTheGame = (
+    e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+  ) => {
+    e.preventDefault();
+    setCards(initialCards);
+    setScore(0);
+  };
+
   return (
     <main>
       <div className={styles.container}>
         <h1 className={styles.score}>{score}</h1>
         <article className={styles.board}>
           {isGameFinished && (
-            <button className={styles.replayTheGame}>
+            <button
+              onClick={(e) => restartTheGame(e)}
+              className={styles.replayTheGame}
+            >
               Game Finished, Play Again?
             </button>
           )}
