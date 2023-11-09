@@ -90,7 +90,7 @@ const challengesInfos: TChallangeInfoArrayObject = [
       return mainUrlForChallenges.concat(this.urlName);
     },
     inspiredBy: "https://www.youtube.com/watch?v=5UcfBfSP2T4&t=3s",
-    onProgress: true,
+    onProgress: false,
   },
 ];
 
