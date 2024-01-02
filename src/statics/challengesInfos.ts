@@ -92,6 +92,16 @@ const challengesInfos: TChallangeInfoArrayObject = [
     inspiredBy: "https://www.youtube.com/watch?v=5UcfBfSP2T4&t=3s",
     onProgress: false,
   },
+  {
+    id: 8,
+    urlName: "rickandmortymultiselectcomponent",
+    challenge: "creating multi-select auto complete component",
+    linkHref() {
+      return mainUrlForChallenges.concat(this.urlName);
+    },
+    inspiredBy: "https://github.com/sahinkutlu/frontend-case/tree/main",
+    onProgress: true,
+  },
 ];
 
 export default challengesInfos;
