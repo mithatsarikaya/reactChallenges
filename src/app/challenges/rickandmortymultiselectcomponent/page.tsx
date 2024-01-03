@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import styles from "./rickandmorty.module.css";
 import { ApiData } from "./types";
 
@@ -34,49 +34,88 @@ const RickAndMortyChallenge = () => {
     );
   }, []);
 
-  //TODO: working on checkbox
+  const handleCheckbox = (e: ChangeEvent<HTMLInputElement>, id: number) => {
+    setCharacters((prevCharacters) => {
+      if (!prevCharacters) {
+        return null;
+      } else {
+        return prevCharacters?.map((character) =>
+          id == character.id
+            ? { ...character, isSelected: !character.isSelected }
+            : character
+        );
+      }
+    });
+  };
+
+  const handleSelectedNameClick = (
+    e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>,
+    id: number
+  ) => {
+    setCharacters((prevCharacters) => {
+      if (!prevCharacters) {
+        return null;
+      } else {
+        return prevCharacters?.map((character) =>
+          id == character.id ? { ...character, isSelected: false } : character
+        );
+      }
+    });
+  };
+
+  //TODOne: working on checkbox
+  //TODO: work on input text to filter checkboxes
   return (
     <main className={styles.container}>
-      <article>
-        <div>
-          <div>
-            {characters?.map(
-              (character) => character.isSelected && <p>{character.name}</p>
-            )}
-            <input
-              className={styles.inputArea}
-              type="search"
-              name=""
-              id=""
-              placeholder="write smt"
-            />
-          </div>
-          <div>
-            <ul>
-              {characters &&
-                characters.map((character) => (
-                  <div className={styles.rowContainer} key={character.imageUrl}>
-                    <input
-                      type="checkbox"
-                      name=""
-                      id=""
-                      defaultChecked={character.isSelected}
-                    />
-                    <img
-                      className={styles.characterImage}
-                      src={character.imageUrl}
-                      alt=""
-                    />
-                    <div>
-                      <li className={styles.rowsInDropDown}>
-                        {character.name}
-                      </li>
-                      <span>{character.episodeCount} episodes</span>
-                    </div>
+      <article className={styles.allSections}>
+        <div className={styles.selectedNamesAndInput}>
+          {characters &&
+            characters?.map(
+              (character) =>
+                character.isSelected && (
+                  <div
+                    onClick={(e) => handleSelectedNameClick(e, character.id)}
+                  >
+                    <button className={styles.nameButton}>
+                      {character.name} &times;
+                    </button>
                   </div>
-                ))}
-            </ul>
-          </div>
+                )
+            )}
+          <input
+            className={styles.inputArea}
+            type="search"
+            name=""
+            id=""
+            placeholder="write smt"
+          />
+        </div>
+        <div className={styles.characterSection}>
+          <ul>
+            {characters &&
+              characters.map((character) => (
+                <div className={styles.rowContainer} key={character.imageUrl}>
+                  <input
+                    className={styles.inputArea}
+                    type="checkbox"
+                    name=""
+                    id=""
+                    defaultChecked={character.isSelected}
+                    checked={character.isSelected}
+                    onChange={(e) => handleCheckbox(e, character.id)}
+                  />
+                  <img
+                    className={styles.characterImage}
+                    src={character.imageUrl}
+                    alt=""
+                  />
+                  <div>
+                    <li className={styles.rowsInDropDown}>{character.name}</li>
+                    <span>{character.episodeCount} episodes</span>
+                  </div>
+                </div>
+              ))}
+          </ul>
         </div>
       </article>
     </main>

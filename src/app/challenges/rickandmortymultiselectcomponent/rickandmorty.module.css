@@ -6,14 +6,38 @@
   place-content: center;
 }
 
+.allSections {
+  width: 400px;
+  height: 50vh;
+  display: grid;
+  place-content: center;
+}
+
+.selectedNamesAndInput {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.nameButton {
+}
+.nameButton:hover {
+  outline: none;
+}
+
 .inputArea {
   border: none;
 }
 
+.characterSection {
+  overflow-y: scroll;
+}
 .rowContainer {
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+.inputArea {
+  min-width: 30px;
 }
 
 .characterImage {
