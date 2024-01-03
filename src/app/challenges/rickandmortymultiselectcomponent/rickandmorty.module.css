@@ -5,3 +5,23 @@
   display: grid;
   place-content: center;
 }
+
+.inputArea {
+  border: none;
+}
+
+.rowContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.characterImage {
+  aspect-ratio: 1/1;
+  width: 3rem;
+  border-radius: 20%;
+}
+
+.rowsInDropDown {
+  list-style-type: none;
+}
