@@ -4,6 +4,16 @@ import styles from "./rickandmorty.module.css";
 import { ApiData } from "./types";
 
 const RickAndMortyChallenge = () => {
+  const [characters, setCharacters] = useState<Awaited<
+    ReturnType<typeof getNamesImagesAndEpisodeNumbersWithIsSelected>
+  > | null>(null);
+
+  const [searchedText, setSearchedText] = useState("");
+
+  let filteredCharacters = characters?.filter((character) =>
+    character.name.toLowerCase().includes(searchedText)
+  );
+
   let getData = async (): Promise<ApiData> => {
     let data = await fetch("https://rickandmortyapi.com/api/character").then(
       (res) =>
@@ -23,10 +33,6 @@ const RickAndMortyChallenge = () => {
       isSelected: false,
     }));
   };
-
-  const [characters, setCharacters] = useState<Awaited<
-    ReturnType<typeof getNamesImagesAndEpisodeNumbersWithIsSelected>
-  > | null>(null);
 
   useEffect(() => {
     getNamesImagesAndEpisodeNumbersWithIsSelected().then((res) =>
@@ -63,14 +69,35 @@ const RickAndMortyChallenge = () => {
     });
   };
 
+  function getHighlightedText(text: string, highlight: string) {
+    // Split on highlight term and include term into parts, ignore case
+    const parts = text.split(new RegExp(`(${highlight})`, "gi"));
+    return (
+      <span>
+        {parts.map((part, i) => (
+          <span
+            key={i}
+            style={
+              part.toLowerCase() === highlight.toLowerCase()
+                ? { fontWeight: "bold" }
+                : {}
+            }
+          >
+            {part}
+          </span>
+        ))}
+      </span>
+    );
+  }
+
   //TODOne: working on checkbox
-  //TODO: work on input text to filter checkboxes
+  //TODOne: work on input text to filter checkboxes
   return (
     <main className={styles.container}>
       <article className={styles.allSections}>
         <div className={styles.selectedNamesAndInput}>
           {characters &&
-            characters?.map(
+            characters.map(
               (character) =>
                 character.isSelected && (
                   <div
@@ -87,13 +114,16 @@ const RickAndMortyChallenge = () => {
             type="search"
             name=""
             id=""
-            placeholder="write smt"
+            placeholder="search"
+            value={searchedText}
+            onChange={(e) => setSearchedText(e.target.value)}
           />
+          <path d="M7 10l5 5 5-5z"></path>
         </div>
-        <div className={styles.characterSection}>
-          <ul>
-            {characters &&
-              characters.map((character) => (
+        <div className={styles.charactersSection}>
+          <ul className={styles.allCharacterRows}>
+            {filteredCharacters &&
+              filteredCharacters.map((character) => (
                 <div className={styles.rowContainer} key={character.imageUrl}>
                   <input
                     className={styles.inputArea}
@@ -110,7 +140,10 @@ const RickAndMortyChallenge = () => {
                     alt=""
                   />
                   <div>
-                    <li className={styles.rowsInDropDown}>{character.name}</li>
+                    {/* <li className={styles.namesInDropDown}>{character.name}</li> */}
+                    <div>
+                      {getHighlightedText(character.name, searchedText)}
+                    </div>
                     <span>{character.episodeCount} episodes</span>
                   </div>
                 </div>
