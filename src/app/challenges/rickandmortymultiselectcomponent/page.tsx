@@ -2,6 +2,7 @@
 import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import styles from "./rickandmorty.module.css";
 import { ApiData } from "./types";
+import DropdownIcon from "./components/DropdownIcon";
 
 const RickAndMortyChallenge = () => {
   const [characters, setCharacters] = useState<Awaited<
@@ -118,7 +119,7 @@ const RickAndMortyChallenge = () => {
             value={searchedText}
             onChange={(e) => setSearchedText(e.target.value)}
           />
-          <path d="M7 10l5 5 5-5z"></path>
+          <DropdownIcon isDropped={false} />
         </div>
         <div className={styles.charactersSection}>
           <ul className={styles.allCharacterRows}>

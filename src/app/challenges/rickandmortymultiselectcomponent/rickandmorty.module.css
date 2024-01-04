@@ -1,5 +1,6 @@
 .container {
   --color-border: gray;
+  --size-border-radius: 8px;
 
   background-color: white;
   color: black;
@@ -21,7 +22,7 @@
   flex-wrap: wrap;
   min-height: 50px;
   border: 2px solid var(--color-border);
-  border-radius: 5px;
+  border-radius: var(--size-border-radius);
 }
 
 .nameButton {
@@ -32,7 +33,13 @@
 
 .inputArea {
   border: none;
-  padding-left: 2px;
+  margin: 2px;
+  padding: 2px;
+  min-width: 30px;
+  height: auto;
+}
+.inputArea:focus {
+  outline: none;
 }
 
 .charactersSection {
@@ -40,7 +47,7 @@
   width: 300px;
   overflow-y: scroll;
   border: solid 2px var(--color-border);
-  border-radius: 5px;
+  border-radius: var(--size-border-radius);
 }
 
 /* .allCharacterRows {
@@ -56,9 +63,6 @@
   border-bottom: solid 2px var(--color-border);
   padding: 5px;
   /* border-radius: 5px; */
-}
-.inputArea {
-  min-width: 30px;
 }
 
 .characterImage {

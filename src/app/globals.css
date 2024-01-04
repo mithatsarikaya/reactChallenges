@@ -17,6 +17,6 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+/* button:hover {
   outline: black 4px solid;
-}
+} */
