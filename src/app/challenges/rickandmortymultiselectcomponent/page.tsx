@@ -11,9 +11,12 @@ const RickAndMortyChallenge = () => {
 
   const [searchedText, setSearchedText] = useState("");
 
-  let filteredCharacters = characters?.filter((character) =>
-    character.name.toLowerCase().includes(searchedText)
-  );
+  const [isDropped, setIsDropped] = useState(false);
+
+  let filteredCharacters =
+    characters?.filter((character) =>
+      character.name.toLowerCase().includes(searchedText)
+    ) || [];
 
   let getData = async (): Promise<ApiData> => {
     let data = await fetch("https://rickandmortyapi.com/api/character").then(
@@ -40,6 +43,10 @@ const RickAndMortyChallenge = () => {
       setCharacters(res)
     );
   }, []);
+
+  useEffect(() => {
+    searchedText != "" ? setIsDropped(true) : setIsDropped(false);
+  }, [searchedText]);
 
   const handleCheckbox = (e: ChangeEvent<HTMLInputElement>, id: number) => {
     setCharacters((prevCharacters) => {
@@ -96,61 +103,74 @@ const RickAndMortyChallenge = () => {
   return (
     <main className={styles.container}>
       <article className={styles.allSections}>
-        <div className={styles.selectedNamesAndInput}>
-          {characters &&
-            characters.map(
-              (character) =>
-                character.isSelected && (
-                  <div
-                    onClick={(e) => handleSelectedNameClick(e, character.id)}
-                  >
-                    <button className={styles.nameButton}>
-                      {character.name} &times;
-                    </button>
-                  </div>
-                )
-            )}
-          <input
-            className={styles.inputArea}
-            type="search"
-            name=""
-            id=""
-            placeholder="search"
-            value={searchedText}
-            onChange={(e) => setSearchedText(e.target.value)}
-          />
-          <DropdownIcon isDropped={false} />
-        </div>
-        <div className={styles.charactersSection}>
-          <ul className={styles.allCharacterRows}>
-            {filteredCharacters &&
-              filteredCharacters.map((character) => (
-                <div className={styles.rowContainer} key={character.imageUrl}>
-                  <input
-                    className={styles.inputArea}
-                    type="checkbox"
-                    name=""
-                    id=""
-                    defaultChecked={character.isSelected}
-                    checked={character.isSelected}
-                    onChange={(e) => handleCheckbox(e, character.id)}
-                  />
-                  <img
-                    className={styles.characterImage}
-                    src={character.imageUrl}
-                    alt=""
-                  />
-                  <div>
-                    {/* <li className={styles.namesInDropDown}>{character.name}</li> */}
-                    <div>
-                      {getHighlightedText(character.name, searchedText)}
+        <div className={styles.inputSelectedNamesSearchSection}>
+          <div className={styles.selectedNamesAndInput}>
+            {characters &&
+              characters.map(
+                (character) =>
+                  character.isSelected && (
+                    <div
+                      key={character.id}
+                      onClick={(e) => handleSelectedNameClick(e, character.id)}
+                    >
+                      <button className={styles.nameButton}>
+                        {character.name} &times;
+                      </button>
                     </div>
-                    <span>{character.episodeCount} episodes</span>
-                  </div>
-                </div>
-              ))}
-          </ul>
+                  )
+              )}
+            <input
+              className={styles.inputArea}
+              type="search"
+              name=""
+              id=""
+              placeholder="search"
+              value={searchedText}
+              onChange={(e) => setSearchedText(e.target.value)}
+            />
+          </div>
+          <div className={styles.dropdown}>
+            <DropdownIcon isDropped={isDropped} setIsDropped={setIsDropped} />
+          </div>
         </div>
+        {isDropped && (
+          <div
+            // style={{ display: `${isDropped ? "block" : "none"}` }}
+            className={styles.charactersSection}
+          >
+            <ul className={styles.allCharacterRows}>
+              {filteredCharacters?.length > 0 ? (
+                filteredCharacters.map((character) => (
+                  <div className={styles.rowContainer} key={character.imageUrl}>
+                    <input
+                      className={styles.inputArea}
+                      type="checkbox"
+                      name=""
+                      id=""
+                      // defaultChecked={character.isSelected}
+                      checked={character.isSelected}
+                      onChange={(e) => handleCheckbox(e, character.id)}
+                    />
+                    <img
+                      className={styles.characterImage}
+                      src={character.imageUrl}
+                      alt=""
+                    />
+                    <div>
+                      {/* <li className={styles.namesInDropDown}>{character.name}</li> */}
+                      <div>
+                        {getHighlightedText(character.name, searchedText)}
+                      </div>
+                      <span>{character.episodeCount} episodes</span>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p className={styles.noResult}> No results found</p>
+              )}
+            </ul>
+          </div>
+        )}
       </article>
     </main>
   );

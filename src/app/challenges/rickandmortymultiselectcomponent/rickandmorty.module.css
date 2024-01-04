@@ -1,6 +1,7 @@
 .container {
   --color-border: gray;
   --size-border-radius: 8px;
+  --size-width-total: 300px;
 
   background-color: white;
   color: black;
@@ -10,23 +11,31 @@
 }
 
 .allSections {
-  width: 300px;
+  position: relative;
+  /* width: var(--size-width-total); */
   height: 50vh;
-  display: grid;
-  place-content: center;
-  gap: 20px;
+  /* display: grid; */
+  /* place-content: center; */
+  /* gap: 20px; */
+}
+
+.inputSelectedNamesSearchSection {
+  /* position: absolute; */
+  /* display: grid;
+  grid-template-columns: 4fr 1fr; */
+  position: relative;
+  width: var(--size-width-total);
+  margin-bottom: 10px;
 }
 
 .selectedNamesAndInput {
   display: flex;
   flex-wrap: wrap;
-  min-height: 50px;
+  min-height: 30px;
   border: 2px solid var(--color-border);
   border-radius: var(--size-border-radius);
 }
 
-.nameButton {
-}
 .nameButton:hover {
   outline: none;
 }
@@ -42,9 +51,17 @@
   outline: none;
 }
 
+.dropdown {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
 .charactersSection {
+  position: absolute;
   height: 50vh;
-  width: 300px;
+  width: var(--size-width-total);
   overflow-y: scroll;
   border: solid 2px var(--color-border);
   border-radius: var(--size-border-radius);
@@ -73,4 +90,8 @@
 
 .namesInDropDown {
   list-style-type: none;
+}
+
+.noResult {
+  text-align: center;
 }

@@ -1,9 +1,32 @@
+"use client";
+import { MouseEvent, useState } from "react";
 import styles from "./components.module.css";
 
-// TODO: working on dropdown and up icon
+// TODOne: working on dropdown and up icon
 
-const DropdownIcon = ({ isDropped }: { isDropped: boolean }) => {
-  return isDropped ? <button>▲</button> : <button>▼</button>;
+const DropdownIcon = ({
+  isDropped,
+  setIsDropped,
+}: {
+  isDropped: boolean;
+  setIsDropped: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
+  const handleDropdownMenu = (
+    e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+  ) => {
+    e.preventDefault();
+    setIsDropped(!isDropped);
+  };
+  console.log(isDropped);
+
+  return (
+    <button
+      onClick={(e) => handleDropdownMenu(e)}
+      className={styles.dropdownIcon}
+    >
+      {isDropped ? "▲" : "▼"}
+    </button>
+  );
 };
 // const DropdownIcon = ({ isDropped }: { isDropped: boolean }) => {
 //   return isDropped ? (
