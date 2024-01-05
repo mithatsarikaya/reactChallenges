@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import getApiData from "../api/getData";
+import allCharacterData from "../api/getData";
 
 // get single exercise session. need the sessionID
 const useGetData = () => {
@@ -14,7 +14,7 @@ const useGetData = () => {
     try {
       setIsLoading(true);
 
-      return (await getApiData()).results.map((result) => ({
+      return allCharacterData.map((result) => ({
         id: result.id,
         name: result.name,
         imageUrl: result.image,

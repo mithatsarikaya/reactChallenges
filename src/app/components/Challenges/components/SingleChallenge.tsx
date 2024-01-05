@@ -4,7 +4,13 @@ import { TChallangeInfo } from "@/statics/challengesInfos";
 
 const SingleChallenge = ({ challenge }: { challenge: TChallangeInfo }) => {
   return (
-    <Link className={styles.challenge} href={challenge.linkHref()}>
+    <Link
+      style={{
+        pointerEvents: challenge.onProgress ? "none" : "auto",
+      }}
+      className={styles.challenge}
+      href={challenge.linkHref()}
+    >
       <article className={styles.challengeArticle} key={challenge.id}>
         {challenge.urlName} {challenge.onProgress && "(not finished)"}
         <p className={styles.challengeDesc}>{challenge.challenge}</p>
