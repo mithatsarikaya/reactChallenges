@@ -12,17 +12,10 @@
 
 .allSections {
   position: relative;
-  /* width: var(--size-width-total); */
   height: 50vh;
-  /* display: grid; */
-  /* place-content: center; */
-  /* gap: 20px; */
 }
 
 .inputSelectedNamesSearchSection {
-  /* position: absolute; */
-  /* display: grid;
-  grid-template-columns: 4fr 1fr; */
   position: relative;
   width: var(--size-width-total);
   margin-bottom: 10px;
@@ -66,12 +59,6 @@
   border: solid 2px var(--color-border);
   border-radius: var(--size-border-radius);
 }
-
-/* .allCharacterRows {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-} */
 
 .rowContainer {
   display: flex;

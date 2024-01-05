@@ -1,49 +1,21 @@
 "use client";
 import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import styles from "./rickandmorty.module.css";
-import { ApiData } from "./types";
 import DropdownIcon from "./components/DropdownIcon";
+import useGetData from "./hooks/useGetData";
 
 const RickAndMortyChallenge = () => {
-  const [characters, setCharacters] = useState<Awaited<
-    ReturnType<typeof getNamesImagesAndEpisodeNumbersWithIsSelected>
-  > | null>(null);
-
   const [searchedText, setSearchedText] = useState("");
 
   const [isDropped, setIsDropped] = useState(false);
+  const { isLoading, characters, setCharacters } = useGetData();
 
   let filteredCharacters =
     characters?.filter((character) =>
       character.name.toLowerCase().includes(searchedText)
     ) || [];
 
-  let getData = async (): Promise<ApiData> => {
-    let data = await fetch("https://rickandmortyapi.com/api/character").then(
-      (res) =>
-        res.json().then((resJson) => {
-          return resJson;
-        })
-    );
-    return data;
-  };
-
-  let getNamesImagesAndEpisodeNumbersWithIsSelected = async () => {
-    return (await getData()).results.map((result) => ({
-      id: result.id,
-      name: result.name,
-      imageUrl: result.image,
-      episodeCount: result.episode.length,
-      isSelected: false,
-    }));
-  };
-
-  useEffect(() => {
-    getNamesImagesAndEpisodeNumbersWithIsSelected().then((res) =>
-      setCharacters(res)
-    );
-  }, []);
-
+  //if user starts to search when droppeddown is off then open the dropdown menu
   useEffect(() => {
     searchedText != "" ? setIsDropped(true) : setIsDropped(false);
   }, [searchedText]);
@@ -134,10 +106,7 @@ const RickAndMortyChallenge = () => {
           </div>
         </div>
         {isDropped && (
-          <div
-            // style={{ display: `${isDropped ? "block" : "none"}` }}
-            className={styles.charactersSection}
-          >
+          <div className={styles.charactersSection}>
             <ul className={styles.allCharacterRows}>
               {filteredCharacters?.length > 0 ? (
                 filteredCharacters.map((character) => (
