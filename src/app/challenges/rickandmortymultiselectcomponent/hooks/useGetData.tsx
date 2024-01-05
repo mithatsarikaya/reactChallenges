@@ -1,22 +1,32 @@
 "use client";
 import { useEffect, useState } from "react";
-import getData from "../api/getData";
+import getApiData from "../api/getData";
 
 // get single exercise session. need the sessionID
 const useGetData = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isError, setIsError] = useState("");
   const [characters, setCharacters] = useState<Awaited<
     ReturnType<typeof getNamesImagesAndEpisodeNumbersWithIsSelected>
   > | null>(null);
 
   let getNamesImagesAndEpisodeNumbersWithIsSelected = async () => {
-    return (await getData()).results.map((result) => ({
-      id: result.id,
-      name: result.name,
-      imageUrl: result.image,
-      episodeCount: result.episode.length,
-      isSelected: false,
-    }));
+    try {
+      setIsLoading(true);
+
+      return (await getApiData()).results.map((result) => ({
+        id: result.id,
+        name: result.name,
+        imageUrl: result.image,
+        episodeCount: result.episode.length,
+        isSelected: false,
+      }));
+    } catch (e) {
+      let errorMessage = (e as Error).message;
+      setIsError(errorMessage);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -25,6 +35,6 @@ const useGetData = () => {
     );
   }, []);
 
-  return { isLoading, characters, setCharacters };
+  return { isLoading, characters, setCharacters, isError };
 };
 export default useGetData;

@@ -8,7 +8,7 @@ const RickAndMortyChallenge = () => {
   const [searchedText, setSearchedText] = useState("");
 
   const [isDropped, setIsDropped] = useState(false);
-  const { isLoading, characters, setCharacters } = useGetData();
+  const { isLoading, characters, setCharacters, isError } = useGetData();
 
   let filteredCharacters =
     characters?.filter((character) =>
@@ -74,7 +74,7 @@ const RickAndMortyChallenge = () => {
   //TODOne: work on input text to filter checkboxes
   return (
     <main className={styles.container}>
-      <article className={styles.allSections}>
+      <form className={styles.allSections}>
         <div className={styles.inputSelectedNamesSearchSection}>
           <div className={styles.selectedNamesAndInput}>
             {characters &&
@@ -126,7 +126,6 @@ const RickAndMortyChallenge = () => {
                       alt=""
                     />
                     <div>
-                      {/* <li className={styles.namesInDropDown}>{character.name}</li> */}
                       <div>
                         {getHighlightedText(character.name, searchedText)}
                       </div>
@@ -135,12 +134,15 @@ const RickAndMortyChallenge = () => {
                   </div>
                 ))
               ) : (
-                <p className={styles.noResult}> No results found</p>
+                <p className={styles.noResult}>
+                  {" "}
+                  {isError ? isError : " No results found"}
+                </p>
               )}
             </ul>
           </div>
         )}
-      </article>
+      </form>
     </main>
   );
 };

@@ -17,7 +17,6 @@ const DropdownIcon = ({
     e.preventDefault();
     setIsDropped(!isDropped);
   };
-  console.log(isDropped);
 
   return (
     <button
