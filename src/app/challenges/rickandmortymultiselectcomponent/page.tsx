@@ -1,8 +1,9 @@
 "use client";
-import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
+import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from "react";
 import styles from "./rickandmorty.module.css";
 import DropdownIcon from "./components/DropdownIcon";
 import useGetData from "./hooks/useGetData";
+import HighlightedText from "./components/HighlightedText";
 
 const RickAndMortyChallenge = () => {
   const [searchedText, setSearchedText] = useState("");
@@ -11,17 +12,19 @@ const RickAndMortyChallenge = () => {
   const { isLoading, characters, setCharacters, isError } =
     useGetData(searchedText);
 
+  //mouse keys
+
+  const characterContainer = useRef<HTMLUListElement>(null);
+  console.log(characterContainer.current?.children);
+
+  //mouse keys
+
   let filteredCharacters =
     characters?.filter((character) =>
       character.name.toLowerCase().includes(searchedText)
     ) || [];
 
-  //if user starts to search when droppeddown is off then open the dropdown menu
-  useEffect(() => {
-    searchedText != "" ? setIsDropped(true) : setIsDropped(false);
-  }, [searchedText]);
-
-  const handleCheckbox = (e: ChangeEvent<HTMLInputElement>, id: number) => {
+  const handleCheckbox = (id: number) => {
     setCharacters((prevCharacters) => {
       if (!prevCharacters) {
         return null;
@@ -50,32 +53,11 @@ const RickAndMortyChallenge = () => {
     });
   };
 
-  function getHighlightedText(text: string, highlight: string) {
-    // Split on highlight term and include term into parts, ignore case
-    const parts = text.split(new RegExp(`(${highlight})`, "gi"));
-    return (
-      <span>
-        {parts.map((part, i) => (
-          <span
-            key={i}
-            style={
-              part.toLowerCase() === highlight.toLowerCase()
-                ? { fontWeight: "bold" }
-                : {}
-            }
-          >
-            {part}
-          </span>
-        ))}
-      </span>
-    );
-  }
-
   //TODOne: working on checkbox
   //TODOne: work on input text to filter checkboxes
   return (
     <main className={styles.container}>
-      <form className={styles.allSections}>
+      <form id="form123" className={styles.allSections}>
         <div className={styles.inputSelectedNamesSearchSection}>
           <div className={styles.selectedNamesAndInput}>
             {characters &&
@@ -93,6 +75,7 @@ const RickAndMortyChallenge = () => {
                   )
               )}
             <input
+              autoFocus
               className={styles.inputArea}
               type="search"
               name=""
@@ -103,15 +86,23 @@ const RickAndMortyChallenge = () => {
             />
           </div>
           <div className={styles.dropdown}>
-            <DropdownIcon isDropped={isDropped} setIsDropped={setIsDropped} />
+            <DropdownIcon
+              isDropped={isDropped}
+              setIsDropped={setIsDropped}
+              searchedText={searchedText}
+            />
           </div>
         </div>
         {isDropped && (
           <div className={styles.charactersSection}>
-            <ul className={styles.allCharacterRows}>
+            <ul ref={characterContainer} className={styles.allCharacterRows}>
               {filteredCharacters?.length > 0 ? (
                 filteredCharacters.map((character) => (
-                  <div className={styles.rowContainer} key={character.imageUrl}>
+                  <div
+                    onClick={(e) => handleCheckbox(character.id)}
+                    className={styles.rowContainer}
+                    key={character.imageUrl}
+                  >
                     <input
                       className={styles.inputArea}
                       type="checkbox"
@@ -119,7 +110,7 @@ const RickAndMortyChallenge = () => {
                       id=""
                       // defaultChecked={character.isSelected}
                       checked={character.isSelected}
-                      onChange={(e) => handleCheckbox(e, character.id)}
+                      // onChange={(e) => handleCheckbox(character.id)}
                     />
                     <img
                       className={styles.characterImage}
@@ -128,7 +119,10 @@ const RickAndMortyChallenge = () => {
                     />
                     <div>
                       <div>
-                        {getHighlightedText(character.name, searchedText)}
+                        <HighlightedText
+                          name={character.name}
+                          searchedText={searchedText}
+                        />
                       </div>
                       <span>{character.episodeCount} episodes</span>
                     </div>
