@@ -8,7 +8,8 @@ const RickAndMortyChallenge = () => {
   const [searchedText, setSearchedText] = useState("");
 
   const [isDropped, setIsDropped] = useState(false);
-  const { isLoading, characters, setCharacters, isError } = useGetData();
+  const { isLoading, characters, setCharacters, isError } =
+    useGetData(searchedText);
 
   let filteredCharacters =
     characters?.filter((character) =>

@@ -5,9 +5,9 @@ import { TChallangeInfo } from "@/statics/challengesInfos";
 const SingleChallenge = ({ challenge }: { challenge: TChallangeInfo }) => {
   return (
     <Link
-      style={{
-        pointerEvents: challenge.onProgress ? "none" : "auto",
-      }}
+      // style={{
+      //   pointerEvents: challenge.onProgress ? "none" : "auto",
+      // }}
       className={styles.challenge}
       href={challenge.linkHref()}
     >
