@@ -14,8 +14,13 @@ const RickAndMortyChallenge = () => {
 
   //mouse keys
 
-  const characterContainer = useRef<HTMLUListElement>(null);
-  console.log(characterContainer.current?.children);
+  useEffect(() => {
+    window.addEventListener(
+      "keydown",
+      (e: KeyboardEvent) =>
+        e.key == "ArrowDown" && !isDropped && setIsDropped(true)
+    );
+  }, []);
 
   //mouse keys
 
@@ -57,7 +62,7 @@ const RickAndMortyChallenge = () => {
   //TODOne: work on input text to filter checkboxes
   return (
     <main className={styles.container}>
-      <form id="form123" className={styles.allSections}>
+      <article id="article123" className={styles.allSections}>
         <div className={styles.inputSelectedNamesSearchSection}>
           <div className={styles.selectedNamesAndInput}>
             {characters &&
@@ -95,7 +100,7 @@ const RickAndMortyChallenge = () => {
         </div>
         {isDropped && (
           <div className={styles.charactersSection}>
-            <ul ref={characterContainer} className={styles.allCharacterRows}>
+            <ul className={styles.allCharacterRows}>
               {filteredCharacters?.length > 0 ? (
                 filteredCharacters.map((character) => (
                   <div
@@ -137,7 +142,7 @@ const RickAndMortyChallenge = () => {
             </ul>
           </div>
         )}
-      </form>
+      </article>
     </main>
   );
 };

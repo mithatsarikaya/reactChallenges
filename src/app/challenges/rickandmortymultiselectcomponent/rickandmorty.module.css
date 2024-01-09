@@ -15,6 +15,10 @@
   height: 50vh;
 }
 
+.allSections:hover {
+  cursor: pointer;
+}
+
 .inputSelectedNamesSearchSection {
   position: relative;
   width: var(--size-width-total);
