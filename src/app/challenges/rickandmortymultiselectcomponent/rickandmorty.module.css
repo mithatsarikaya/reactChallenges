@@ -36,6 +36,9 @@
 .nameButton:hover {
   outline: none;
 }
+.nameButton:focus-visible {
+  background-color: red;
+}
 
 .inputArea {
   border: none;
@@ -46,6 +49,11 @@
 }
 .inputArea:focus {
   outline: none;
+}
+
+.inputArea:focus-visible {
+  /* background-color: red; */
+  outline: red 2px solid;
 }
 
 .dropdown {
@@ -71,6 +79,10 @@
   border-bottom: solid 2px var(--color-border);
   padding: 5px;
   /* border-radius: 5px; */
+}
+
+.rowContainer:focus-visible {
+  background-color: red;
 }
 
 .characterImage {

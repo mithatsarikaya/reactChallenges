@@ -7,6 +7,7 @@ import HighlightedText from "./components/HighlightedText";
 
 const RickAndMortyChallenge = () => {
   const [searchedText, setSearchedText] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const [isDropped, setIsDropped] = useState(false);
   const { isLoading, characters, setCharacters, isError } =
@@ -15,11 +16,41 @@ const RickAndMortyChallenge = () => {
   //mouse keys
 
   useEffect(() => {
-    window.addEventListener(
-      "keydown",
-      (e: KeyboardEvent) =>
-        e.key == "ArrowDown" && !isDropped && setIsDropped(true)
-    );
+    window.addEventListener("keydown", (e: KeyboardEvent) => {
+      inputRef.current?.dispatchEvent(
+        new KeyboardEvent("keypress", {
+          key: "Tab",
+        })
+      );
+
+      return () => {
+        console.log("object");
+
+        window.addEventListener("keydown", (e: KeyboardEvent) => {
+          console.log(inputRef.current?.nextSibling);
+        });
+      };
+      // console.log(inputRef.current?.nextSibling);
+      // const nextElement = inputRef.current?.nextElementSibling;
+      // console.log({ nextElement });
+
+      // if (nextElement) {
+      //   // nextElement.focus();
+      // }
+
+      // e.key == "ArrowDown" && !isDropped && setIsDropped(true);
+      // console.log("hey");
+      // console.log("active element", document.activeElement?.nextSibling);
+      // // e.preventDefault();
+      // const nextElement = document.activeElement!
+      //   .nextElementSibling as HTMLElement;
+      // if (nextElement) {
+      //   nextElement.focus();
+      // }
+      // window.dispatchEvent(new KeyboardEvent("keypress", { key: "Tab" }));
+    });
+
+    // window.addEventListener("keydown", (e: KeyboardEvent) => console.log(e));
   }, []);
 
   //mouse keys
@@ -80,6 +111,7 @@ const RickAndMortyChallenge = () => {
                   )
               )}
             <input
+              ref={inputRef}
               autoFocus
               className={styles.inputArea}
               type="search"
