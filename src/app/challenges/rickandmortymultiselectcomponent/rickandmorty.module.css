@@ -37,7 +37,7 @@
   outline: none;
 }
 .nameButton:focus-visible {
-  background-color: red;
+  outline: 2px solid red;
 }
 
 .inputArea {
@@ -54,6 +54,9 @@
 .inputArea:focus-visible {
   /* background-color: red; */
   outline: red 2px solid;
+}
+.inputArea:hover {
+  cursor: pointer;
 }
 
 .dropdown {

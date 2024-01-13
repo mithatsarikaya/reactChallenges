@@ -13,16 +13,31 @@ const useGetData = (searchedText: string) => {
   let getNamesImagesAndEpisodeNumbersWithIsSelected = async () => {
     try {
       setIsLoading(true);
+      // await new Promise((r) => setTimeout(r, 2000));
 
-      return (await getCharactersByQuery(searchedText)).map((result) => ({
-        id: result.id,
-        name: result.name,
-        imageUrl: result.image,
-        episodeCount: result.episode.length,
-        isSelected: false,
-      }));
+      let characters = await getCharactersByQuery(searchedText);
+
+      if (typeof characters == "string") {
+        setIsError("No characters found");
+        return;
+      }
+
+      if (characters.length > 0) {
+        let charactersWithSelectedProperty = characters.map((result) => ({
+          id: result.id,
+          name: result.name,
+          imageUrl: result.image,
+          episodeCount: result.episode.length,
+          isSelected: false,
+        }));
+
+        return charactersWithSelectedProperty;
+      }
+
+      console.log({ characters });
     } catch (e) {
       let errorMessage = (e as Error).message;
+      console.log({ errorMessage });
       setIsError(errorMessage);
     } finally {
       setIsLoading(false);

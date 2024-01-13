@@ -23,14 +23,20 @@ export async function getAllCharacters() {
   return allData;
 }
 
-export async function getCharactersByQuery(query: string): Promise<Result[]> {
+export async function getCharactersByQuery(
+  query: string
+): Promise<Result[] | string> {
   try {
     let url = `${config.apiUrlForCharactersByQuery}${query}`;
 
     const response = await fetch(url);
     const responseJson = await response.json();
 
-    return responseJson.results;
+    if (responseJson.results) {
+      return responseJson.results;
+    } else {
+      return "No character found";
+    }
   } catch (error) {
     throw new Error((error as Error).message);
   }
