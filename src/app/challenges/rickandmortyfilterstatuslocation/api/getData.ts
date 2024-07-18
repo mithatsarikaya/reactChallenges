@@ -1,13 +1,26 @@
 import config from "../config.json";
 import { ApiData, ApiDataLocation, Result } from "../types";
 
-export async function getAllCharactersByFilters(status: string | null) {
-  // when page initial loads it has no query string
-  let queryString =
-    status == undefined
-      ? `https://rickandmortyapi.com/api/character/`
-      : `https://rickandmortyapi.com/api/character/?status=${status?.toLowerCase()}`;
-  console.log(queryString);
+export async function getAllCharactersByFilters(
+  status: string | null,
+  locationIDs: string | null
+) {
+  if (typeof status == undefined || typeof locationIDs == undefined) {
+    return;
+  }
+
+  if (!status && !locationIDs) {
+    return await getCharacters();
+  }
+}
+
+export async function getCharacters() {
+  let res = await fetch(`https://rickandmortyapi.com/api/character/`);
+  let allCharacters: ApiData = await res.json();
+  return allCharacters;
+}
+export async function getCharactersByStatus(status: string) {
+  let queryString = `https://rickandmortyapi.com/api/character/?status=${status?.toLowerCase()}`;
   let res = await fetch(queryString);
   let allCharacters: ApiData = await res.json();
   return allCharacters;
@@ -23,6 +36,21 @@ export async function getAllLocationsByText(locationText: string | null) {
   let res = await fetch(queryString);
   let allLocations: ApiDataLocation = await res.json();
   return allLocations;
+}
+
+export async function getLocationByIDList(idList: string) {
+  let queryString = `https://rickandmortyapi.com/api/location/${idList}`;
+  console.log(queryString);
+  let res = await fetch(queryString);
+  console.log({ res });
+  let allLocations: ApiDataLocation = await res.json();
+  return allLocations;
+}
+
+export async function getSingleCharacter(link: string) {
+  let characterRes = await fetch(link);
+  let character: Result = await characterRes.json();
+  return character;
 }
 
 export async function getCharactersByQuery(

@@ -17,9 +17,9 @@ const FilterRickAndMorty = async ({
   console.log("chekc", searchParams);
   // TODO: check for anys
   let allCharacters = await getAllCharactersByFilters(
-    searchParams.status as any
+    searchParams.status as any,
+    searchParams.selectedLocationIDs as any
   );
-  console.log(allCharacters);
 
   // TODO: check for anys
   let allLocations = await getAllLocationsByText(searchParams.lastSeen as any);

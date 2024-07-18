@@ -45,11 +45,11 @@ const FilterCharacters = ({
 
   useEffect(() => {
     router.push(
-      `?status=${userFilterRadioButtons}&lastSeen=${searchText}&selectedLocationIDs=${selectedLocations.map(
-        (lo) => lo.id
-      )}`
+      `?status=${userFilterRadioButtons}&lastSeen=${searchText}&selectedLocationIDs=${selectedLocations
+        .map((loca) => loca.id)
+        .join(",")}`
     );
-  }, [userFilterRadioButtons, searchText]);
+  }, [userFilterRadioButtons, searchText, selectedLocations]);
 
   console.log(userFilterRadioButtons);
   console.log(searchText);
