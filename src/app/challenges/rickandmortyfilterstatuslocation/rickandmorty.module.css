@@ -1,0 +1,31 @@
+/* .mainPage {
+  width: 100%;
+} */
+
+/* .filterlocationsallcharacters {
+  display: grid;
+  place-content: center;
+  gap: 10px;
+} */
+
+.searchtext {
+  height: 30px;
+  width: 300px;
+  padding: 10px;
+}
+.allCharactersSection {
+  display: grid;
+  place-content: center;
+  gap: 5px;
+}
+
+.allLocations {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.location {
+  padding: 5px;
+  border: 2px solid salmon;
+  cursor: pointer;
+}

@@ -1,0 +1,4 @@
+{
+  "apiUrlForAllCharacters": "https://rickandmortyapi.com/api/character?page=",
+  "apiUrlForCharactersByQuery": "https://rickandmortyapi.com/api/character/?name="
+}

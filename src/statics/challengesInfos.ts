@@ -100,6 +100,16 @@ const challengesInfos: TChallangeInfoArrayObject = [
       return mainUrlForChallenges.concat(this.urlName);
     },
     inspiredBy: "https://github.com/sahinkutlu/frontend-case/tree/main",
+    onProgress: false,
+  },
+  {
+    id: 9,
+    urlName: "rickandmortyfilterstatuslocation",
+    challenge: "filtering by status and location",
+    linkHref() {
+      return mainUrlForChallenges.concat(this.urlName);
+    },
+    inspiredBy: "bakicibul.net",
     onProgress: true,
   },
 ];
