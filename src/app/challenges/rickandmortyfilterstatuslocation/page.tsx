@@ -15,10 +15,14 @@ const FilterRickAndMorty = async ({
   }
 
   console.log("chekc", searchParams);
-  let allCharacters = await getAllCharactersByFilters(searchParams.status);
+  // TODO: check for anys
+  let allCharacters = await getAllCharactersByFilters(
+    searchParams.status as any
+  );
   console.log(allCharacters);
 
-  let allLocations = await getAllLocationsByText(searchParams.lastSeen);
+  // TODO: check for anys
+  let allLocations = await getAllLocationsByText(searchParams.lastSeen as any);
   return (
     <div className={styles.mainPage}>
       {allCharacters.results ? (
