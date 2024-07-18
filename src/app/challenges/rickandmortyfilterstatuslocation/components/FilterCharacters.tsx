@@ -51,12 +51,11 @@ const FilterCharacters = ({
     );
   }, [userFilterRadioButtons, searchText, selectedLocations]);
 
-  console.log(userFilterRadioButtons);
-  console.log(searchText);
   return (
     <section>
       <input
         className={styles.searchtext}
+        value={searchText}
         type="text"
         onChange={(e) => handleSearchTextChange(e)}
         placeholder="search places..."
@@ -84,34 +83,55 @@ const FilterCharacters = ({
       ) : (
         <div>Location data could not fetch</div>
       )}
-      <label htmlFor="Alive">Alive</label>
-      <input
-        onChange={(e) => handleRadioChange(e)}
-        type="radio"
-        name="status"
-        id="Alive"
-        value="Alive"
-      />
-      <label htmlFor="Death">Death</label>
-      <input
-        onChange={(e) => handleRadioChange(e)}
-        type="radio"
-        name="status"
-        id="Death"
-        value="dead"
-      />
-      <label htmlFor="Unknown">Unknown</label>
-      <input
-        onChange={(e) => handleRadioChange(e)}
-        type="radio"
-        name="status"
-        id="Unknown"
-        value="unknown"
-      />
+      <div className={styles.allRadios}>
+        <label className={styles.radioLabel} htmlFor="Alive">
+          Alive
+        </label>
+        <input
+          className={styles.radio}
+          onChange={(e) => handleRadioChange(e)}
+          type="radio"
+          name="status"
+          id="Alive"
+          value="Alive"
+        />
+        <label className={styles.radioLabel} htmlFor="Death">
+          Death
+        </label>
+        <input
+          className={styles.radio}
+          onChange={(e) => handleRadioChange(e)}
+          type="radio"
+          name="status"
+          id="Death"
+          value="dead"
+        />
+        <label className={styles.radioLabel} htmlFor="Unknown">
+          Unknown
+        </label>
+        <input
+          className={styles.radio}
+          onChange={(e) => handleRadioChange(e)}
+          type="radio"
+          name="status"
+          id="Unknown"
+          value="unknown"
+        />
+      </div>
 
       {selectedLocations.length > 0 &&
         selectedLocations.map((selectedLocation) => (
-          <p key={selectedLocation.id}>{selectedLocation.name}</p>
+          <p
+            onClick={(e) =>
+              handleSelectAndUnSelectLocation(
+                selectedLocation.name,
+                selectedLocation.id.toString()
+              )
+            }
+            key={selectedLocation.id}
+          >
+            {selectedLocation.name}
+          </p>
         ))}
     </section>
   );

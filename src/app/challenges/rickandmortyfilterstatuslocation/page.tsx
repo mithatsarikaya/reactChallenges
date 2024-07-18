@@ -11,10 +11,9 @@ const FilterRickAndMorty = async ({
   searchParams: { [key: string]: string | string[] | undefined };
 }) => {
   if (typeof searchParams == "undefined") {
-    return <div>Problem occured</div>;
+    return <div>searchparams undefined</div>;
   }
 
-  console.log("chekc", searchParams);
   // TODO: check for anys
   let allCharacters = await getAllCharactersByFilters(
     searchParams.status as any,
@@ -25,11 +24,11 @@ const FilterRickAndMorty = async ({
   let allLocations = await getAllLocationsByText(searchParams.lastSeen as any);
   return (
     <div className={styles.mainPage}>
-      {allCharacters.results ? (
+      {allCharacters ? (
         <div className={styles.filterlocationsallcharacters}>
           <FilterCharacters allLocations={allLocations.results} />
           <main className={styles.allCharactersSection}>
-            {allCharacters.results.map((character) => (
+            {allCharacters.map((character) => (
               <article key={character.id}>
                 <p>{character.name}</p>
                 <p>{character.status}</p>

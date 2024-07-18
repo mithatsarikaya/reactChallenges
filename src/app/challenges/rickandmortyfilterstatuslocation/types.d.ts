@@ -40,3 +40,15 @@ export interface LocationData {
   url: string;
   created: string;
 }
+
+export type ApiLocationData = LocationSingleData | LocationSingleData[];
+
+export interface LocationSingleData {
+  id: number;
+  name: string;
+  type: string;
+  dimension: string;
+  residents: string[] | [];
+  url: string;
+  created: string;
+}

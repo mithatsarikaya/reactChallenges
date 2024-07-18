@@ -9,10 +9,25 @@
 } */
 
 .searchtext {
+  margin: 10px;
   height: 30px;
   width: 300px;
   padding: 10px;
 }
+
+.allRadios {
+  margin: 20px;
+}
+
+.radioLabel {
+  cursor: pointer;
+}
+
+.radio {
+  cursor: pointer;
+  margin-right: 20px;
+}
+
 .allCharactersSection {
   display: grid;
   place-content: center;
