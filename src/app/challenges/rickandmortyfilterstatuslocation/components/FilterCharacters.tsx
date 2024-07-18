@@ -45,9 +45,9 @@ const FilterCharacters = ({
 
   useEffect(() => {
     router.push(
-      `?status=${userFilterRadioButtons}&lastSeen=${searchText}&selectedLocationIDs=${selectedLocations
-        .map((loca) => loca.id)
-        .join(",")}`
+      `?status=${userFilterRadioButtons}&lastSeen=${searchText}&selectedLocationIDs=${selectedLocations.map(
+        (lo) => lo.id
+      )}`
     );
   }, [userFilterRadioButtons, searchText]);
 
@@ -111,7 +111,7 @@ const FilterCharacters = ({
 
       {selectedLocations.length > 0 &&
         selectedLocations.map((selectedLocation) => (
-          <p>{selectedLocation.name}</p>
+          <p key={selectedLocation.id}>{selectedLocation.name}</p>
         ))}
     </section>
   );
